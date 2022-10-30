@@ -77,12 +77,6 @@ function MasqueBlizzBars:OnSkinChange(Group, Skin, SkinID, Gloss, Backdrop, Colo
 	MasqueBlizzBars.MasqueSkin[Group].Colors = Colors
 end
 
-function MasqueBlizzBars:UIParent_ManageFramePositions()
-	for k, v in pairs(MasqueBlizzBars.Groups) do
-		v:ReSkin()
-	end
-end
-
 function MasqueBlizzBars:SpellFlyout_Toggle(flyoutID, ...)
 	-- Determine how many buttons the flyout will actually have
 	local _, _, numSlots, _ = GetFlyoutInfo(flyoutID)
@@ -105,7 +99,6 @@ function MasqueBlizzBars:SpellFlyout_Toggle(flyoutID, ...)
 end
 
 function MasqueBlizzBars:Init()
-	hooksecurefunc("UIParent_ManageFramePositions", MasqueBlizzBars.UIParent_ManageFramePositions);
 	hooksecurefunc(SpellFlyout, "Toggle", MasqueBlizzBars.SpellFlyout_Toggle)
 	MSQ:Register("Blizzard Action Bars", MasqueBlizzBars.OnSkinChange, MasqueBlizzBars)
 
