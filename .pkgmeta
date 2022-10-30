@@ -1,0 +1,9 @@
+package-as: MasqueBlizzBars
+
+required-dependencies:
+  - masque
+
+ignore:
+  - .pkgmeta
+  - README.md
+
