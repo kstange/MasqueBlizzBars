@@ -1,0 +1,8 @@
+﻿## Interface: 80300
+## Version: 1.0.0
+## Title: Masque Blizz Bars
+## Author: Madnessbox
+## SavedVariables: MasqueSkin
+## RequiredDeps: Masque
+
+MasqueBlizzBars.lua
