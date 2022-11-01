@@ -15,67 +15,89 @@
 
 local MSQ = LibStub("Masque")
 
+-- Title will be used for the group name shown in Masque
+-- Buttons should contain a list of frame names with an integer value
+--  If  0, assume to be a singular button with that name
+--  If >0, attempt to loop through frames with the name prefix suffixed with the integer range
 local MasqueBlizzBars = {
-	MasqueSkin = MasqueSkin or {},
-	Groups = {},
-	Buttons = {
+	Groups = {
 		ActionBar = {
-			ActionButton = NUM_ACTIONBAR_BUTTONS
+			Title = "Action Bar 1",
+			Buttons = {
+				ActionButton = NUM_ACTIONBAR_BUTTONS
+			}
 		},
 		MultiBarBottomLeft = {
-			MultiBarBottomLeftButton = NUM_MULTIBAR_BUTTONS
+			Title = "Action Bar 2",
+			Buttons = {
+				MultiBarBottomLeftButton = NUM_MULTIBAR_BUTTONS
+			}
 		},
 		MultiBarBottomRight = {
-			MultiBarBottomRightButton = NUM_MULTIBAR_BUTTONS
+			Title = "Action Bar 3",
+			Buttons = {
+				MultiBarBottomRightButton = NUM_MULTIBAR_BUTTONS
+			}
 		},
 		MultiBarLeft = {
-			MultiBarLeftButton = NUM_MULTIBAR_BUTTONS
+			Title = "Action Bar 4",
+			Buttons = {
+				MultiBarLeftButton = NUM_MULTIBAR_BUTTONS
+			}
 		},
 		MultiBarRight = {
-			MultiBarRightButton = NUM_MULTIBAR_BUTTONS
+			Title = "Action Bar 5",
+			Buttons = {
+				MultiBarRightButton = NUM_MULTIBAR_BUTTONS
+			}
 		},
 		-- Three new bars for 10.0.0
 		MultiBar5 = {
-			MultiBar5Button = NUM_MULTIBAR_BUTTONS
+			Title = "Action Bar 6",
+			Buttons = {
+				MultiBar5Button = NUM_MULTIBAR_BUTTONS
+			}
 		},
 		MultiBar6 = {
-			MultiBar6Button = NUM_MULTIBAR_BUTTONS
+			Title = "Action Bar 7",
+			Buttons = {
+				MultiBar6Button = NUM_MULTIBAR_BUTTONS
+			}
 		},
 		MultiBar7 = {
-			MultiBar7Button = NUM_MULTIBAR_BUTTONS
+			Title = "Action Bar 8",
+			Buttons = {
+				MultiBar7Button = NUM_MULTIBAR_BUTTONS
+			}
 		},
 		PetBar = {
-			PetActionButton = NUM_PET_ACTION_SLOTS
+			Title = "Pet Bar",
+			Buttons = {
+				PetActionButton = NUM_PET_ACTION_SLOTS
+			}
 		},
 		PossessBar = {
-			PossessButton = NUM_POSSESS_SLOTS
+			Title = "Possess Bar",
+			Buttons = {
+				PossessButton = NUM_POSSESS_SLOTS
+			}
 		},
 		-- Since 10.0.0 the value is in the XML frame definition
 		StanceBar = {
-			StanceButton = StanceBar.numButtons
+			Title = "Stance Bar",
+			Buttons = {
+				StanceButton = StanceBar.numButtons
+			}
 		},
 		-- SpellFlyout always has one button at UI init time
 		SpellFlyout = {
-			SpellFlyoutButton = 1
+			Title = "Spell Flyouts",
+			Buttons = {
+				SpellFlyoutButton = 1
+			}
 		}
 	}
 }
-
-function MasqueBlizzBars:OnSkinChange(Group, Skin, SkinID, Gloss, Backdrop, Colors)
-	if (Group == nil) then
-		for k, v in pairs(MasqueBlizzBars.Groups) do
-			MasqueBlizzBars:OnSkinChange(v, Skin, SkinID, Gloss, Backdrop, Colors)
-		end
-		return
-	elseif (not MasqueBlizzBars.MasqueSkin[Group]) then
-		MasqueBlizzBars.MasqueSkin[Group] = {}
-	end
-	MasqueBlizzBars.MasqueSkin[Group].Skin = Skin
-	MasqueBlizzBars.MasqueSkin[Group].SkinID = SkinID
-	MasqueBlizzBars.MasqueSkin[Group].Gloss = Gloss
-	MasqueBlizzBars.MasqueSkin[Group].Backdrop = Backdrop
-	MasqueBlizzBars.MasqueSkin[Group].Colors = Colors
-end
 
 function MasqueBlizzBars:SpellFlyout_Toggle(flyoutID, ...)
 	-- Determine how many buttons the flyout will actually have
@@ -89,63 +111,35 @@ function MasqueBlizzBars:SpellFlyout_Toggle(flyoutID, ...)
 	end
 
 	-- Skin any extra buttons found
-	local numButtons = MasqueBlizzBars.Buttons.SpellFlyout.SpellFlyoutButton
+	local flyoutGroup = MasqueBlizzBars.Groups.SpellFlyout
+	local numButtons = flyoutGroup.Buttons.SpellFlyoutButton
         if (numButtons < activeSlots) then
 		for i = numButtons+1, activeSlots do
-			MasqueBlizzBars:SkinButton(MasqueBlizzBars.Groups.SpellFlyout, _G["SpellFlyoutButton"..i])
+			flyoutGroup.Group:AddButton(_G["SpellFlyoutButton"..i])
 		end
-		MasqueBlizzBars.Buttons.SpellFlyout.SpellFlyoutButton = activeSlots
+		flyoutGroup.Buttons.SpellFlyoutButton = activeSlots
 	end
 end
 
 function MasqueBlizzBars:Init()
 	hooksecurefunc(SpellFlyout, "Toggle", MasqueBlizzBars.SpellFlyout_Toggle)
-	MSQ:Register("Blizzard Action Bars", MasqueBlizzBars.OnSkinChange, MasqueBlizzBars)
 
-	MasqueBlizzBars.Groups = {
-		ActionBar           = MSQ:Group("Blizzard Action Bars", "Action Bar 1"),
-		MultiBarBottomLeft  = MSQ:Group("Blizzard Action Bars", "Action Bar 2"),
-		MultiBarBottomRight = MSQ:Group("Blizzard Action Bars", "Action Bar 3"),
-		MultiBarLeft        = MSQ:Group("Blizzard Action Bars", "Action Bar 4"),
-		MultiBarRight       = MSQ:Group("Blizzard Action Bars", "Action Bar 5"),
-		MultiBar5           = MSQ:Group("Blizzard Action Bars", "Action Bar 6"),
-		MultiBar6           = MSQ:Group("Blizzard Action Bars", "Action Bar 7"),
-		MultiBar7           = MSQ:Group("Blizzard Action Bars", "Action Bar 8"),
-		PetBar              = MSQ:Group("Blizzard Action Bars", "Pet Bar"),
-		PossessBar          = MSQ:Group("Blizzard Action Bars", "Possess Bar"),
-		StanceBar           = MSQ:Group("Blizzard Action Bars", "Stance Bar"),
-		SpellFlyout         = MSQ:Group("Blizzard Action Bars", "Spell Flyouts"),
-	}
-
-	if MasqueBlizzBars.MasqueSkin then
-		for k, v in pairs(MasqueBlizzBars.Groups) do
-			if (MasqueBlizzBars.MasqueSkin[v.Group]) then
-				v:SetOption('Group', MasqueBlizzBars.MasqueSkin[v.Group].Group)
-				v:SetOption('SkinID', MasqueBlizzBars.MasqueSkin[v.Group].SkinID)
-				v:SetOption('Gloss', MasqueBlizzBars.MasqueSkin[v.Group].Gloss)
-				v:SetOption('Backdrop', MasqueBlizzBars.MasqueSkin[v.Group].Backdrop)
-				v:SetOption('Colors', MasqueBlizzBars.MasqueSkin[v.Group].Colors)
-			end
-		end
+	for k, v in pairs(MasqueBlizzBars.Groups) do
+		v.Group = MSQ:Group("Blizzard Action Bars", v.Title)
 	end
 
 	MasqueBlizzBars:UpdateActionBars()
 end
 
-function MasqueBlizzBars:SkinButton(group, button)
-	if button then
-		group:AddButton(button)
-	end
-end
-
 function MasqueBlizzBars:UpdateActionBars()
 	for k, v in pairs(MasqueBlizzBars.Groups) do
-		for _k, _v in pairs(MasqueBlizzBars.Buttons[k]) do
+		for _k, _v in pairs(v.Buttons) do
+			-- If the number is zero this is a singular button name
 			if (_v == 0) then
-				MasqueBlizzBars:SkinButton(v, _G[_k])
+				v.Group:AddButton(_G[_k])
 			else
 				for i = 1, _v do
-					MasqueBlizzBars:SkinButton(v, _G[_k..i])
+					v.Group:AddButton(_G[_k..i])
 				end
 			end
 		end
