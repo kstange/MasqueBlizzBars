@@ -1,7 +1,10 @@
-﻿## Interface: 100000
+## Interface: 100000
 ## Version: 2.0.2
 ## Title: Masque Blizz Bars
 ## Author: SimGuy3k, Madnessbox
 ## RequiredDeps: Masque
+
+## X-Curse-Project-ID: 694481
+## X-Wago-ID: e56nWDK9
 
 MasqueBlizzBars.lua
