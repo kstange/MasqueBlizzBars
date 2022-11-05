@@ -1,6 +1,6 @@
 ## Interface: 100000
-## Version: 2.0.2
-## Title: Masque Blizz Bars
+## Version: 2.0.3-beta
+## Title: Masque Blizzard Bars
 ## Author: SimGuy3k, Madnessbox
 ## RequiredDeps: Masque
 
