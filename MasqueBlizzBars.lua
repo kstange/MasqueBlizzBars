@@ -184,10 +184,14 @@ function MasqueBlizzBars:ZoneAbilityFrame_UpdateDisplayedZoneAbilities()
 		-- I'm not sure if the Frame created for the ZAB is used for
 		-- the whole life of the UI so if the frame changes, we'll
 		-- skin whatever replaced it.
-		if zab and zab:GetObjectType() == "Button" and
-		   bar.State.ZoneAbilityButton[i] ~= zab then
-			bar.Group:AddButton(zab)
-			bar.State.ZoneAbilityButton[i] = zab
+		if zab and zab:GetObjectType() == "Button" then
+			if bar.State.ZoneAbilityButton[i] ~= zab then
+				-- Workaround inconsistent button structure
+				zab.icon = zab.Icon
+				zab.cooldown = zab.Cooldown
+				bar.Group:AddButton(zab)
+				bar.State.ZoneAbilityButton[i] = zab
+			end
 		end
 	end
 end
