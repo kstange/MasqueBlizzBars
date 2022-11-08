@@ -186,10 +186,17 @@ function MasqueBlizzBars:ZoneAbilityFrame_UpdateDisplayedZoneAbilities()
 		-- skin whatever replaced it.
 		if zab and zab:GetObjectType() == "Button" then
 			if bar.State.ZoneAbilityButton[i] ~= zab then
-				-- Workaround inconsistent button structure
-				zab.icon = zab.Icon
-				zab.cooldown = zab.Cooldown
-				bar.Group:AddButton(zab)
+
+				-- Define the regions for this weird button
+				local zabRegions = {
+					Icon = zab.Icon,
+					Count = zab.Count,
+					Cooldown= zab.Cooldown,
+					Normal = zab.NormalTexture,
+					Highlight = zab:GetHighlightTexture(),
+				}
+
+				bar.Group:AddButton(zab, zabRegions, "Action")
 				bar.State.ZoneAbilityButton[i] = zab
 			end
 		end
