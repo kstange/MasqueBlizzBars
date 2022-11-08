@@ -153,7 +153,7 @@ function MasqueBlizzBars:SpellFlyout_Toggle(flyoutID, ...)
         for slot = 1, numSlots do
 		local _, _, isKnown, _, _ = GetFlyoutSlotInfo(flyoutID, slot)
 		if (isKnown) then
-			activeSlots = activeSlots+1
+			activeSlots = activeSlots + 1
 		end
 	end
 
@@ -161,7 +161,7 @@ function MasqueBlizzBars:SpellFlyout_Toggle(flyoutID, ...)
 	local bar = MasqueBlizzBars.Groups.SpellFlyout
 	local numButtons = bar.Buttons.SpellFlyoutButton
         if (numButtons < activeSlots) then
-		for i = numButtons+1, activeSlots do
+		for i = numButtons + 1, activeSlots do
 			bar.Group:AddButton(_G["SpellFlyoutButton"..i])
 		end
 		bar.Buttons.SpellFlyoutButton = activeSlots
@@ -191,9 +191,9 @@ function MasqueBlizzBars:ZoneAbilityFrame_UpdateDisplayedZoneAbilities()
 				local zabRegions = {
 					Icon = zab.Icon,
 					Count = zab.Count,
-					Cooldown= zab.Cooldown,
+					Cooldown = zab.Cooldown,
 					Normal = zab.NormalTexture,
-					Highlight = zab:GetHighlightTexture(),
+					Highlight = zab:GetHighlightTexture()
 				}
 
 				bar.Group:AddButton(zab, zabRegions, "Action")
@@ -218,19 +218,19 @@ function MasqueBlizzBars:Init()
 
 	-- Create groups for each defined button group and add any buttons
 	-- that should exist at this point
-	for k, v in pairs(MasqueBlizzBars.Groups) do
-		v.Group = MSQ:Group("Blizzard Action Bars", v.Title)
+	for _, bar in pairs(MasqueBlizzBars.Groups) do
+		bar.Group = MSQ:Group("Blizzard Action Bars", bar.Title)
 
-		for _k, _v in pairs(v.Buttons) do
+		for button, count in pairs(bar.Buttons) do
 
-			-- If zero, assume _k is the actual button name
-			if (_v == 0) then
-				v.Group:AddButton(_G[_k])
+			-- If zero, assume button is the actual button name
+			if (count == 0) then
+				bar.Group:AddButton(_G[button])
 
 			-- Otherwise, append the range of numbers to the name
 			else
-				for i = 1, _v do
-					v.Group:AddButton(_G[_k..i])
+				for i = 1, count do
+					bar.Group:AddButton(_G[button..i])
 				end
 			end
 		end
