@@ -1,8 +1,8 @@
 # About Masque Blizzard Bars
 
-You can install this addon from [CurseForge](https://www.curseforge.com/wow/addons/masque-blizz-bars-revived "CurseForge") or [Wago](https://addons.wago.io/addons/masqueblizzbars).
+You can install this addon from [CurseForge](https://www.curseforge.com/wow/addons/masque-blizz-bars-revived "CurseForge"), [Wago](https://addons.wago.io/addons/masqueblizzbars), or [WoW Interface](https://www.wowinterface.com/downloads/info26502-MasqueBlizzardBars.html).
 
-This addon enables [Masque](https://github.com/SFX-WoW/Masque) ([CurseForge](https://www.curseforge.com/wow/addons/masque), [Wago](https://addons.wago.io/addons/masque)) to skin the built-in WoW action bars.  It requires Masque to function and is configurable only with Masque's settings UI.  It can currently skin the following bars:
+This addon enables [Masque](https://github.com/SFX-WoW/Masque) ([CurseForge](https://www.curseforge.com/wow/addons/masque), [Wago](https://addons.wago.io/addons/masque), [WoW Interface](https://www.wowinterface.com/downloads/info12097-Masque.html)) to skin the built-in WoW action bars.  It requires Masque to function and is configurable only with Masque's settings UI.  It can currently skin the following bars:
 
 * Main Action Bar
 * Multi Bars (Action Bars 2 - 8)
