@@ -1,3 +1,9 @@
+-- 
+-- Masque Blizzard Bars
+-- Enables Masque to skin the built-in WoW action bars
+--
+-- Copyright 2022 SimGuy
+-- Copyright 2020 Madnessbox
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by the
