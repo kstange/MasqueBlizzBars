@@ -1,9 +1,14 @@
 package-as: MasqueBlizzBars
 
+manual-changelog:
+  filename: CHANGELOG.md
+  markup-type: markdown
+
 required-dependencies:
   - masque
 
 ignore:
   - .pkgmeta
   - README.md
+  - CHANGELOG.md
 
