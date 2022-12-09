@@ -1,4 +1,4 @@
-# About
+# About Masque Blizzard Bars
 
 You can install this addon from [CurseForge](https://www.curseforge.com/wow/addons/masque-blizz-bars-revived "CurseForge") or [Wago](https://addons.wago.io/addons/masqueblizzbars).
 
