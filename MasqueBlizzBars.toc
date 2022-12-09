@@ -6,6 +6,7 @@
 ## RequiredDeps: Masque
 
 ## X-Curse-Project-ID: 694481
+## X-WoWI-ID: 26502
 ## X-Wago-ID: e56nWDK9
 
 MasqueBlizzBars.lua
