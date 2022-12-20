@@ -22,8 +22,10 @@
 local MSQ = LibStub("Masque")
 
 -- Title will be used for the group name shown in Masque
+-- Delayed indicates this group will be deferred to a hook or event
 -- Buttons should contain a list of frame names with an integer value
---  If  0, assume to be a singular button with that name
+--  If -1, assume to be a singular button with that name
+--  If  0, this is a dynamic frame to be skinned later
 --  If >0, attempt to loop through frames with the name prefix suffixed with
 --  the integer range
 -- State can be used for storing information about special buttons
@@ -100,8 +102,7 @@ local MasqueBlizzBars = {
 		SpellFlyout = {
 			Title = "Spell Flyouts",
 			Buttons = {
-				-- SpellFlyout has one button at UI init time
-				SpellFlyoutButton = 1
+				SpellFlyoutButton = 0
 			}
 		},
 		OverrideActionBar = {
@@ -209,6 +210,34 @@ function MasqueBlizzBars:ZoneAbilityFrame_UpdateDisplayedZoneAbilities()
 	end
 end
 
+-- Skin any buttons in the table as members of the given Masque group.
+-- If parent is set, then the button names are children of the parent
+-- table. The buttons value can be a nested table.
+function MasqueBlizzBars:Skin(buttons, group, parent)
+	if not parent then parent = _G end
+	for button, children in pairs(buttons) do
+		if (type(children) == "table") then
+			if parent[button] then
+				--print('recurse:', button, parent[button])
+				MasqueBlizzBars:Skin(children, group, parent[button])
+			end
+		else
+			-- If zero, assume button is the actual button name
+			if children == -1 then
+				--print("button:", button, children, parent[button])
+				group:AddButton(parent[button])
+
+			-- Otherwise, append the range of numbers to the name
+			elseif children > 0 then
+				for i = 1, children do
+					--print("button:", button, children, parent[button..i])
+					group:AddButton(parent[button..i])
+				end
+			end
+		end
+	end
+end
+
 function MasqueBlizzBars:Init()
 	-- Hook functions to skin elusive buttons
 	hooksecurefunc(SpellFlyout, "Toggle",
@@ -224,21 +253,10 @@ function MasqueBlizzBars:Init()
 
 	-- Create groups for each defined button group and add any buttons
 	-- that should exist at this point
-	for _, bar in pairs(MasqueBlizzBars.Groups) do
-		bar.Group = MSQ:Group("Blizzard Action Bars", bar.Title)
-
-		for button, count in pairs(bar.Buttons) do
-
-			-- If zero, assume button is the actual button name
-			if (count == 0) then
-				bar.Group:AddButton(_G[button])
-
-			-- Otherwise, append the range of numbers to the name
-			else
-				for i = 1, count do
-					bar.Group:AddButton(_G[button..i])
-				end
-			end
+	for _, cont in pairs(MasqueBlizzBars.Groups) do
+		cont.Group = MSQ:Group("Blizzard Action Bars", cont.Title)
+		if not cont.Delayed then
+			MasqueBlizzBars:Skin(cont.Buttons, cont.Group)
 		end
 	end
 end
