@@ -23,7 +23,7 @@ local MSQ = LibStub("Masque")
 
 -- Title will be used for the group name shown in Masque
 -- Delayed indicates this group will be deferred to a hook or event
--- Note will be displayed (if provided) in the Masque settings UI
+-- Notes will be displayed (if provided) in the Masque settings UI
 -- Buttons should contain a list of frame names with an integer value
 --  If -1, assume to be a singular button with that name
 --  If  0, this is a dynamic frame to be skinned later
@@ -102,14 +102,14 @@ local MasqueBlizzBars = {
 		},
 		SpellFlyout = {
 			Title = "Spell Flyouts",
-			Note  = "This group includes all flyouts shown anywhere in the game, such as Action Bars and the Spellbook.",
+			Notes = "This group includes all flyouts shown anywhere in the game, such as Action Bars and the Spellbook.",
 			Buttons = {
 				SpellFlyoutButton = 0
 			}
 		},
 		OverrideActionBar = {
 			Title = "Vehicle Bar",
-			Note = "This bar is shown when you enter a vehicle with abilities. The exit button is not currently able to be skinned.",
+			Notes = "This bar is shown when you enter a vehicle with abilities. The exit button is not currently able to be skinned.",
 			Buttons = {
 				-- Static value in game code is not a global
 				OverrideActionBarButton = 6
@@ -120,7 +120,7 @@ local MasqueBlizzBars = {
 		},
 		ExtraAbilityContainer = {
 			Title = "Extra Ability Buttons",
-			Note  = "This group includes the Extra Action Button shown during encounters and quests, and all Zone Ability Buttons shown for location-based abilities. Some buttons have additional background images framing them, so square skins tend to work best.",
+			Notes = "This group includes the Extra Action Button shown during encounters and quests, and all Zone Ability Buttons shown for location-based abilities.\n\nSome buttons have additional background images framing them, so square skins tend to work best.",
 
 			-- Keep track of the frames that have been processed
 			State = {
@@ -300,8 +300,8 @@ function MasqueBlizzBars:Init()
 	-- that should exist at this point
 	for id, cont in pairs(MasqueBlizzBars.Groups) do
 		cont.Group = MSQ:Group("Blizzard Action Bars", cont.Title, id)
-		if cont.Note then
-			cont.Group.Note = cont.Note
+		if cont.Notes then
+			cont.Group.Notes = cont.Notes
 		end
 		if not cont.Delayed then
 			MasqueBlizzBars:Skin(cont.Buttons, cont.Group)
