@@ -222,7 +222,7 @@ function MasqueBlizzBars:ZoneAbilityFrame_UpdateDisplayedZoneAbilities()
 	local zac = ZoneAbilityFrame.SpellButtonContainer
 	local bar = MasqueBlizzBars.Groups.ExtraAbilityContainer
 
-	for i=1, select("#", zac:GetChildren()) do
+	for i = 1, select("#", zac:GetChildren()) do
 		local zab = select(i, zac:GetChildren())
 
 		-- Try not to add buttons that are already added
@@ -262,7 +262,7 @@ function MasqueBlizzBars:Skin(buttons, group, parent)
 				MasqueBlizzBars:Skin(children, group, parent[button])
 			end
 		else
-			-- If zero, assume button is the actual button name
+			-- If -1, assume button is the actual button name
 			if children == -1 then
 				--print("button:", button, children, parent[button])
 				group:AddButton(parent[button])
