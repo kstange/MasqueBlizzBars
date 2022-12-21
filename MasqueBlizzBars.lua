@@ -124,9 +124,20 @@ local MasqueBlizzBars = {
 				ZoneAbilityButton = {}
 			},
 			Buttons = {
-				-- These buttons don't seem to exist until the
-				-- first time they're used so we'll pick them
-				-- up later
+				-- These buttons exist until the first time
+				-- they're used so we'll pick them up later
+			}
+		},
+		PetBattleFrame = {
+			Title = "Pet Battle Bar",
+			State = {
+				PetBattleButton = {}
+			},
+			Buttons = {
+				-- These buttons are all children of 
+				-- PetBattleFrame.BottomFrame but some don't
+				-- exist or have defined names until the first
+				-- battle
 			}
 		}
 	}
@@ -148,6 +159,34 @@ function MasqueBlizzBars:HandleEvent(event, target)
 		   eab:GetObjectType() == "CheckButton" then
 			bar.Group:AddButton(eab)
 			bar.State.ExtraActionButton = true
+		end
+
+	-- Handle Pet Battle Buttons on Pet Battle start
+	elseif event == "PET_BATTLE_OPENING_START" then
+		local bar = MasqueBlizzBars.Groups.PetBattleFrame
+		local pbf = _G["PetBattleFrame"]["BottomFrame"]
+
+		-- Find the Pet Battle Frame children that are buttons
+		-- but only skin the ones that haven't already been seen
+		for i = 1, select("#", pbf:GetChildren()) do
+			local pbb = select(i, pbf:GetChildren())
+			if type(pbb) == "table" and pbb.GetObjectType then
+				local name = pbb:GetDebugName()
+				local obj = pbb:GetObjectType()
+				if bar.State.PetBattleButton[name] ~= pbb and
+				   (obj == "CheckButton" or obj == "Button") then
+					-- Define the regions for this weird button
+					local pbbRegions = {
+						Icon = pbb.Icon,
+						Count = pbb.Count,
+						Cooldown = nil, -- These buttons have no cooldown frame
+						Normal = pbb.NormalTexture,
+						Highlight = pbb:GetHighlightTexture()
+					}
+					bar.Group:AddButton(pbb, pbbRegions)
+					bar.State.PetBattleButton[name] = pbb
+				end
+			end
 		end
 	end
 end
@@ -249,6 +288,7 @@ function MasqueBlizzBars:Init()
 	-- Capture events to skin elusive buttons
 	MasqueBlizzBars.Events = CreateFrame("Frame")
 	MasqueBlizzBars.Events:RegisterEvent("UPDATE_EXTRA_ACTIONBAR")
+	MasqueBlizzBars.Events:RegisterEvent("PET_BATTLE_OPENING_START")
 	MasqueBlizzBars.Events:SetScript("OnEvent", MasqueBlizzBars.HandleEvent)
 
 	-- Create groups for each defined button group and add any buttons
