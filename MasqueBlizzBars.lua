@@ -231,7 +231,8 @@ function MasqueBlizzBars:ZoneAbilityFrame_UpdateDisplayedZoneAbilities()
 		-- the whole life of the UI so if the frame changes, we'll
 		-- skin whatever replaced it.
 		if zab and zab:GetObjectType() == "Button" then
-			if bar.State.ZoneAbilityButton[i] ~= zab then
+			local name = zab:GetDebugName()
+			if bar.State.ZoneAbilityButton[name] ~= zab then
 
 				-- Define the regions for this weird button
 				local zabRegions = {
@@ -243,7 +244,7 @@ function MasqueBlizzBars:ZoneAbilityFrame_UpdateDisplayedZoneAbilities()
 				}
 
 				bar.Group:AddButton(zab, zabRegions, "Action")
-				bar.State.ZoneAbilityButton[i] = zab
+				bar.State.ZoneAbilityButton[name] = zab
 			end
 		end
 	end
