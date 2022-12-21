@@ -10,6 +10,7 @@ This addon enables [Masque](https://github.com/SFX-WoW/Masque) ([CurseForge](htt
 * Stance Bar
 * Pet Bar
 * Vehicle Bar
+* Pet Battle Bar
 * Extra Ability Buttons (Extra Action Button, Zone Ability Button)
 * Spell Flyout
 

@@ -1,3 +1,8 @@
+### Version 10.0.2.0
+
+* Add support for Pet Battle Bar
+* Changed version numbering to align with WoW Retail version
+
 ### Version 2.0.4
 
 * Bump TOC for WoW 10.0.2
