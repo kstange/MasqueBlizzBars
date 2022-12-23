@@ -299,7 +299,7 @@ function MasqueBlizzBars:Init()
 	-- Create groups for each defined button group and add any buttons
 	-- that should exist at this point
 	for id, cont in pairs(MasqueBlizzBars.Groups) do
-		cont.Group = MSQ:Group("Blizzard Action Bars", cont.Title, "MasqueBlizzBars_" .. id)
+		cont.Group = MSQ:Group("Blizzard Action Bars", cont.Title, id)
 		if cont.Notes then
 			cont.Group.Notes = cont.Notes
 		end
