@@ -21,6 +21,9 @@
 
 local MSQ = LibStub("Masque")
 
+local _, Shared = ...
+local L = Shared.Locale
+
 -- Title will be used for the group name shown in Masque
 -- Delayed indicates this group will be deferred to a hook or event
 -- Notes will be displayed (if provided) in the Masque settings UI
@@ -102,14 +105,14 @@ local MasqueBlizzBars = {
 		},
 		SpellFlyout = {
 			Title = "Spell Flyouts",
-			Notes = "This group includes all flyouts shown anywhere in the game, such as Action Bars and the Spellbook.",
+			Notes = L["This group includes all flyouts shown anywhere in the game, such as Action Bars and the Spellbook."],
 			Buttons = {
 				SpellFlyoutButton = 0
 			}
 		},
 		OverrideActionBar = {
 			Title = "Vehicle Bar",
-			Notes = "This bar is shown when you enter a vehicle with abilities. The exit button is not currently able to be skinned.",
+			Notes = L["This bar is shown when you enter a vehicle with abilities. The exit button is not currently able to be skinned."],
 			Buttons = {
 				-- Static value in game code is not a global
 				OverrideActionBarButton = 6
@@ -120,7 +123,7 @@ local MasqueBlizzBars = {
 		},
 		ExtraAbilityContainer = {
 			Title = "Extra Ability Buttons",
-			Notes = "This group includes the Extra Action Button shown during encounters and quests, and all Zone Ability Buttons shown for location-based abilities.\n\nSome buttons have additional background images framing them, so square skins tend to work best.",
+			Notes = L["This group includes the Extra Action Button shown during encounters and quests, and all Zone Ability Buttons shown for location-based abilities.\n\nSome buttons have additional background images framing them, so square skins tend to work best."],
 
 			-- Keep track of the frames that have been processed
 			State = {
@@ -300,6 +303,8 @@ function MasqueBlizzBars:Init()
 	-- that should exist at this point
 	for id, cont in pairs(MasqueBlizzBars.Groups) do
 		cont.Group = MSQ:Group("Blizzard Action Bars", cont.Title, id)
+		-- Reset l10n group names after ensuring migration to Static IDs
+		cont.Group:SetName(L[cont.Title])
 		if cont.Notes then
 			cont.Group.Notes = cont.Notes
 		end

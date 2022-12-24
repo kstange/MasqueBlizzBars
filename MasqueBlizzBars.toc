@@ -9,4 +9,5 @@
 ## X-WoWI-ID: 26502
 ## X-Wago-ID: e56nWDK9
 
+Locales\Locales.xml
 MasqueBlizzBars.lua
