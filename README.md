@@ -20,6 +20,8 @@ If you like the Dragonflight action bar improvements and don't want to use a bar
 
 If you're looking to skin the built-in Inventory UI elements as well, check out [Masque Blizzard Inventory](/kstange/MasqueBlizzInv) ([CurseForge](https://www.curseforge.com/wow/addons/masque-blizz-inventory "CurseForge"), [Wago](https://addons.wago.io/addons/masqueblizzinv), [WoWInterface](https://www.wowinterface.com/downloads/info26503-MasqueBlizzardInventory.html))!
 
+If you'd like to help localize this addon, please submit translations [here](https://www.curseforge.com/wow/addons/masque-blizz-bars-revived/localization).
+
 I have not tested this with Classic or Wrath Classic, but if there's enough interest I may accept patches.
 
 Note: This code is derived from [Masque Blizz Bars](https://www.curseforge.com/wow/addons/masque-blizz-bars) which is presently marked as abandoned on CurseForge.  The code was listed as GPL-3 in its original location, so that is assumed to be correct and it will continue to be distributed under that license unless otherwise requested by the original author.
