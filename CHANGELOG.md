@@ -1,6 +1,7 @@
 ### Version 10.0.5.0
 
 * Updated for Retail 10.0.5
+* Added support for localization. If you'd like to contribute, please submit translations [here](https://www.curseforge.com/wow/addons/masque-blizz-bars-revived/localization).
 
 ### Version 10.0.2.0
 
