@@ -1,3 +1,7 @@
+### Version 10.0.5.0
+
+* Updated for WoW Retail 10.0.5
+
 ### Version 10.0.2.0
 
 * Add support for Pet Battle Bar
