@@ -1,6 +1,6 @@
 ### Version 10.0.5.0
 
-* Updated for WoW Retail 10.0.5
+* Updated for Retail 10.0.5
 
 ### Version 10.0.2.0
 
