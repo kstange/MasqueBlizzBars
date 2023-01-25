@@ -35,7 +35,6 @@ L["Action Bar 6"] = "快捷列 6"
 L["Action Bar 7"] = "快捷列 7"
 L["Action Bar 8"] = "快捷列 8"
 L["Extra Ability Buttons"] = "額外技能按鈕"
-L["Notes"] = "請啟用 Masque 插件來更改遊戲內鍵快捷列的按鈕外觀。"
 L["NOTES_EXTRA_ABILITY_BUTTONS"] = [=[包含首領戰和任務的額外技能按鈕，以及特定區域才會出現的區域技能。
 
 有些技能會包圍著額外的背景圖案，所以方形的外觀似乎最適合。]=]
