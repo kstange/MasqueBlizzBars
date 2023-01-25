@@ -4,4 +4,4 @@
 
 # Release History
 
-Full release history can be found (here)[https://github.com/kstange/MasqueBlizzBars/wiki/Release-Notes].
+Full release history can be found [here](https://github.com/kstange/MasqueBlizzBars/wiki/Release-Notes).
