@@ -1,3 +1,7 @@
+### Version 10.0.5.1
+
+* Added zhTW localization (Thanks RainbowUI)
+
 ### Version 10.0.5.0
 
 * Updated for Retail 10.0.5

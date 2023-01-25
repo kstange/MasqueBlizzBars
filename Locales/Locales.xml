@@ -3,4 +3,5 @@
 	<Script file="Locales.lua" />
 	<!-- enUS must always be first -->
 	<Script file="enUS.lua" />
+	<Script file="zhTW.lua" />
 </Ui>
