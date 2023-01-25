@@ -105,14 +105,14 @@ local MasqueBlizzBars = {
 		},
 		SpellFlyout = {
 			Title = "Spell Flyouts",
-			Notes = L["This group includes all flyouts shown anywhere in the game, such as Action Bars and the Spellbook."],
+			Notes = L["NOTES_SPELL_FLYOUTS"],
 			Buttons = {
 				SpellFlyoutButton = 0
 			}
 		},
 		OverrideActionBar = {
 			Title = "Vehicle Bar",
-			Notes = L["This bar is shown when you enter a vehicle with abilities. The exit button is not currently able to be skinned."],
+			Notes = L["NOTES_VEHICLE_BAR"],
 			Buttons = {
 				-- Static value in game code is not a global
 				OverrideActionBarButton = 6
@@ -123,7 +123,7 @@ local MasqueBlizzBars = {
 		},
 		ExtraAbilityContainer = {
 			Title = "Extra Ability Buttons",
-			Notes = L["This group includes the Extra Action Button shown during encounters and quests, and all Zone Ability Buttons shown for location-based abilities.\n\nSome buttons have additional background images framing them, so square skins tend to work best."],
+			Notes = L["NOTES_EXTRA_ABILITY_BUTTONS"],
 
 			-- Keep track of the frames that have been processed
 			State = {
