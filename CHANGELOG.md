@@ -1,6 +1,6 @@
 ### Version 10.0.5.1
 
-* Added zhTW localization (Thanks RainbowUI)
+* Added zhTW localization (RainbowUI)
 
 ### Version 10.0.5.0
 
