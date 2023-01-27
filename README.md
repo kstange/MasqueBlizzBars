@@ -20,7 +20,7 @@ If you like the Dragonflight action bar improvements and don't want to use a bar
 
 ## Classic Support
 
-I have not tested this with Classic Era or Wrath Classic, but I may add support when I have time.  If you want to help, you can submit patches.
+I've done very limited testing with Classic Era and Wrath Classic because I don't play them, but I believe everything should work. If you report bugs or submit patches, I'll do my best to address them.
 
 ## Localization
 
