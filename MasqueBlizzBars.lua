@@ -1,15 +1,15 @@
--- 
+--
 -- Masque Blizzard Bars
 -- Enables Masque to skin the built-in WoW action bars
 --
--- Copyright 2022 SimGuy
+-- Copyright 2022-23 SimGuy
 -- Copyright 2020 Madnessbox
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by the
 -- Free Software Foundation, either version 3 of the License, or (at your
 -- option) any later version.
--- 
+--
 -- This program is distributed in the hope that it will be useful, but
 -- WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
 -- or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
@@ -24,9 +24,14 @@ local MSQ = LibStub("Masque")
 local _, Shared = ...
 local L = Shared.Locale
 
+local _, _, _, ver = GetBuildInfo()
+
 -- Title will be used for the group name shown in Masque
 -- Delayed indicates this group will be deferred to a hook or event
 -- Notes will be displayed (if provided) in the Masque settings UI
+-- Versions specifies which WoW clients this group supports:
+--  To match it must be >= low and < high.
+--  High number is the first interface unsupported
 -- Buttons should contain a list of frame names with an integer value
 --  If -1, assume to be a singular button with that name
 --  If  0, this is a dynamic frame to be skinned later
@@ -43,24 +48,28 @@ local MasqueBlizzBars = {
 		},
 		MultiBarBottomLeft = {
 			Title = "Action Bar 2",
+			Versions = { 10300, nil },
 			Buttons = {
 				MultiBarBottomLeftButton = NUM_MULTIBAR_BUTTONS
 			}
 		},
 		MultiBarBottomRight = {
 			Title = "Action Bar 3",
+			Versions = { 10300, nil },
 			Buttons = {
 				MultiBarBottomRightButton = NUM_MULTIBAR_BUTTONS
 			}
 		},
 		MultiBarLeft = {
 			Title = "Action Bar 4",
+			Versions = { 10300, nil },
 			Buttons = {
 				MultiBarLeftButton = NUM_MULTIBAR_BUTTONS
 			}
 		},
 		MultiBarRight = {
 			Title = "Action Bar 5",
+			Versions = { 10300, nil },
 			Buttons = {
 				MultiBarRightButton = NUM_MULTIBAR_BUTTONS
 			}
@@ -68,18 +77,21 @@ local MasqueBlizzBars = {
 		-- Three new bars for 10.0.0
 		MultiBar5 = {
 			Title = "Action Bar 6",
+			Versions = { 100000, nil },
 			Buttons = {
 				MultiBar5Button = NUM_MULTIBAR_BUTTONS
 			}
 		},
 		MultiBar6 = {
 			Title = "Action Bar 7",
+			Versions = { 100000, nil },
 			Buttons = {
 				MultiBar6Button = NUM_MULTIBAR_BUTTONS
 			}
 		},
 		MultiBar7 = {
 			Title = "Action Bar 8",
+			Versions = { 100000, nil },
 			Buttons = {
 				MultiBar7Button = NUM_MULTIBAR_BUTTONS
 			}
@@ -99,13 +111,14 @@ local MasqueBlizzBars = {
 		StanceBar = {
 			Title = "Stance Bar",
 			Buttons = {
-				-- Moved to XML frame definition in 10.0.0
-				StanceButton = StanceBar.numButtons
+				-- Static value in game code is not a global
+				StanceButton = 10
 			}
 		},
 		SpellFlyout = {
 			Title = "Spell Flyouts",
 			Notes = L["NOTES_SPELL_FLYOUTS"],
+			Versions = { 70003, nil },
 			Buttons = {
 				SpellFlyoutButton = 0
 			}
@@ -113,6 +126,7 @@ local MasqueBlizzBars = {
 		OverrideActionBar = {
 			Title = "Vehicle Bar",
 			Notes = L["NOTES_VEHICLE_BAR"],
+			Versions = { 30002, nil },
 			Buttons = {
 				-- Static value in game code is not a global
 				OverrideActionBarButton = 6
@@ -124,6 +138,7 @@ local MasqueBlizzBars = {
 		ExtraAbilityContainer = {
 			Title = "Extra Ability Buttons",
 			Notes = L["NOTES_EXTRA_ABILITY_BUTTONS"],
+			Versions = { 40300, nil },
 
 			-- Keep track of the frames that have been processed
 			State = {
@@ -137,11 +152,12 @@ local MasqueBlizzBars = {
 		},
 		PetBattleFrame = {
 			Title = "Pet Battle Bar",
+			Versions = { 50004, nil },
 			State = {
 				PetBattleButton = {}
 			},
 			Buttons = {
-				-- These buttons are all children of 
+				-- These buttons are all children of
 				-- PetBattleFrame.BottomFrame but some don't
 				-- exist or have defined names until the first
 				-- battle
@@ -285,31 +301,69 @@ function MasqueBlizzBars:Skin(buttons, group, parent)
 	end
 end
 
+-- Check if the current interface version is between the low number (inclusive)
+-- and the high number (exclusive) for implementations that are dependent upon
+-- client version.
+function MasqueBlizzBars:CheckVersion(versions)
+	if not versions or
+	   (versions and
+	    (not versions[1] or ver >= versions[1]) and
+	    (not versions[2] or ver <  versions[2])
+	   ) then
+		return true
+	else
+		return false
+	end
+end
+
 function MasqueBlizzBars:Init()
 	-- Hook functions to skin elusive buttons
-	hooksecurefunc(SpellFlyout, "Toggle",
-	               MasqueBlizzBars.SpellFlyout_Toggle)
 
-	hooksecurefunc(ZoneAbilityFrame, "UpdateDisplayedZoneAbilities",
-	               MasqueBlizzBars.ZoneAbilityFrame_UpdateDisplayedZoneAbilities)
+	-- Spell Flyout
+	if MasqueBlizzBars:CheckVersion({ 70003, nil }) then
+		hooksecurefunc(SpellFlyout, "Toggle",
+		               MasqueBlizzBars.SpellFlyout_Toggle)
+	end
+
+	-- Zone Ability Buttons
+	-- This may be DraenorZoneAbilityFrame_Update if Classic reaches WoD
+	-- This may be ZoneAbilityFrame_Update if Classic reaches Legion
+	if MasqueBlizzBars:CheckVersion({ 90001, nil }) then
+		hooksecurefunc(ZoneAbilityFrame, "UpdateDisplayedZoneAbilities",
+		               MasqueBlizzBars.ZoneAbilityFrame_UpdateDisplayedZoneAbilities)
+	end
 
 	-- Capture events to skin elusive buttons
 	MasqueBlizzBars.Events = CreateFrame("Frame")
-	MasqueBlizzBars.Events:RegisterEvent("UPDATE_EXTRA_ACTIONBAR")
-	MasqueBlizzBars.Events:RegisterEvent("PET_BATTLE_OPENING_START")
+
+	-- Extra Action Button
+	if MasqueBlizzBars:CheckVersion({ 40300, nil }) then
+		MasqueBlizzBars.Events:RegisterEvent("UPDATE_EXTRA_ACTIONBAR")
+	end
+
+	-- Pet Battles
+	if MasqueBlizzBars:CheckVersion({ 50004, nil }) then
+		MasqueBlizzBars.Events:RegisterEvent("PET_BATTLE_OPENING_START")
+	end
+
 	MasqueBlizzBars.Events:SetScript("OnEvent", MasqueBlizzBars.HandleEvent)
 
 	-- Create groups for each defined button group and add any buttons
 	-- that should exist at this point
 	for id, cont in pairs(MasqueBlizzBars.Groups) do
-		cont.Group = MSQ:Group("Blizzard Action Bars", cont.Title, id)
-		-- Reset l10n group names after ensuring migration to Static IDs
-		cont.Group:SetName(L[cont.Title])
-		if cont.Notes then
-			cont.Group.Notes = cont.Notes
-		end
-		if not cont.Delayed then
-			MasqueBlizzBars:Skin(cont.Buttons, cont.Group)
+		if MasqueBlizzBars:CheckVersion(cont.Versions) then
+			cont.Group = MSQ:Group("Blizzard Action Bars", cont.Title, id)
+			-- Reset l10n group names after ensuring migration to Static IDs
+			cont.Group:SetName(L[cont.Title])
+			if cont.Init then
+				cont.Init(cont.Buttons)
+			end
+			if cont.Notes then
+				cont.Group.Notes = cont.Notes
+			end
+			if not cont.Delayed then
+				MasqueBlizzBars:Skin(cont.Buttons, cont.Group)
+			end
 		end
 	end
 end
