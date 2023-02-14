@@ -20,7 +20,7 @@ Masque Blizzard Bars can currently skin the following bars:
 * Extra Ability Buttons (Extra Action Button, Zone Ability Button)
 * Spell Flyout
 
-Each bar type is its own group so you can configure the skin for each independently from Masque's Skin Settings.
+Each bar type is its own group so you can configure them independently from Masque's Skin Settings.
 
 ## Classic Support
 
