@@ -3,25 +3,16 @@
 --
 -- Locales\enUS.lua -- enUS Localization File
 --
--- This program is free software: you can redistribute it and/or modify
--- it under the terms of the GNU General Public License as published by the
--- Free Software Foundation, either version 3 of the License, or (at your
--- option) any later version.
---
--- This program is distributed in the hope that it will be useful, but
--- WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
--- or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
--- more details.
---
--- You should have received a copy of the GNU General Public License along
--- with this program. If not, see <https://www.gnu.org/licenses/>.
+-- Use of this source code is governed by an MIT-style
+-- license that can be found in the LICENSE file or at
+-- https://opensource.org/licenses/MIT.
 --
 
 -- Please use CurseForge to submit localization content for another language:
 -- https://www.curseforge.com/wow/addons/masque-blizz-bars-revived/localization
 
-local Locale = GetLocale()
 -- allow enUS to fill empty strings for other locales
+--local Locale = GetLocale()
 --if Locale ~= "enUS" then return end
 
 local _, Shared = ...
