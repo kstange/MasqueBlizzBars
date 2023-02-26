@@ -51,4 +51,4 @@ If you're looking to skin the built-in Inventory UI elements as well, check out 
 
 ## Licensing Information
 
-The original code was derived from [Masque Blizz Bars](https://www.curseforge.com/wow/addons/masque-blizz-bars) which is presently marked as abandoned on CurseForge.  The code was listed as GPL-3 in its original location, so it was adopted as such.  Since that time the code has been entirely rewritten, and I have elected to re-license the new code under the MIT license as I have done with my other addons.
+The original GPL-3 code and concept was derived from [Masque Blizz Bars](https://www.curseforge.com/wow/addons/masque-blizz-bars) by Madnessbox, which is now abandoned on CurseForge.  Since that time the code has been entirely rewritten, and I have elected to relicense the addon under the MIT license as I have done with my other addons.
