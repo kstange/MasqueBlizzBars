@@ -1,8 +1,9 @@
-# Version 10.0.5.1
+# Version 10.0.5.2
 
-* Added support for Classic Era 1.14.3
-* Added support for Wrath Classic 3.4.1
-* Added zhTW localization (RainbowUI)
+* Significantly reorganized the code
+  * Split functionality into separate files
+  * Improved generalization
+  * There should be no functional changes, but please report any unexpected changes in behavior
 
 # Release History
 
