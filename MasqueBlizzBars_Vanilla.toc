@@ -10,5 +10,8 @@
 ## X-WoWI-ID: 26502
 ## X-Wago-ID: e56nWDK9
 
+Libs\Libs.xml
 Locales\Locales.xml
+Metadata.lua
+Core.lua
 MasqueBlizzBars.lua
