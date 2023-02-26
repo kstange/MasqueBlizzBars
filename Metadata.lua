@@ -19,7 +19,7 @@ local Metadata = {}
 Shared.Metadata = Metadata
 
 Metadata.FriendlyName = "Masque Blizzard Bars"
-Metadata.MasqueFriendlyName = "Blizzard Bars"
+Metadata.MasqueFriendlyName = "Blizzard Action Bars"
 
 -- Title will be used for the group name shown in Masque
 -- Delayed indicates this group will be deferred to a hook or event
