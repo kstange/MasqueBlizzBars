@@ -40,6 +40,7 @@ function Addon:HandleEvent(event, target)
 		-- Make sure the EAB exists and hasn't already been added
 		if not bar.State.ExtraActionButton and eab and
 		   eab:GetObjectType() == "CheckButton" then
+			-- TODO: Update this to use Core:Skin()
 			bar.Group:AddButton(eab)
 			bar.State.ExtraActionButton = true
 		end
@@ -58,6 +59,7 @@ function Addon:HandleEvent(event, target)
 				local obj = pbb:GetObjectType()
 				if bar.State.PetBattleButton[name] ~= pbb and
 				   (obj == "CheckButton" or obj == "Button") then
+					-- TODO: Update this to use Core:Skin()
 					-- Define the regions for this weird button
 					local pbbRegions = {
 						Icon = pbb.Icon,
@@ -91,6 +93,7 @@ function Addon:SpellFlyout_Toggle(flyoutID, ...)
 	local numButtons = bar.Buttons.SpellFlyoutButton
         if (numButtons < activeSlots) then
 		for i = numButtons + 1, activeSlots do
+			-- TODO: Update this to use Core:Skin()
 			bar.Group:AddButton(_G["SpellFlyoutButton"..i])
 		end
 		bar.Buttons.SpellFlyoutButton = activeSlots
@@ -117,6 +120,7 @@ function Addon:ZoneAbilityFrame_UpdateDisplayedZoneAbilities()
 			local name = zab:GetDebugName()
 			if bar.State.ZoneAbilityButton[name] ~= zab then
 
+				-- TODO: Update this to use Core:Skin()
 				-- Define the regions for this weird button
 				local zabRegions = {
 					Icon = zab.Icon,
