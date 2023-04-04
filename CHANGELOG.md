@@ -1,10 +1,6 @@
-# Version 10.0.7.0
+# Version 10.1.0.0
 
-* Updated for Retail 10.0.7
-* Significantly reorganized the code
-  * Split functionality into separate files
-  * Improved generalization
-  * There should be no functional changes, but please report any unexpected changes in behavior
+* Updated for Retail 10.1.0
 
 # Release History
 

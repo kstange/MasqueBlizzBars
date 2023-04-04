@@ -21,6 +21,9 @@ Shared.Metadata = Metadata
 Metadata.FriendlyName = "Masque Blizzard Bars"
 Metadata.MasqueFriendlyName = "Blizzard Action Bars"
 
+-- Compatibility for WoW 10.1.0
+local GetAddOnMetadata = _G.GetAddOnMetadata or C_AddOns.GetAddOnMetadata
+
 -- Title will be used for the group name shown in Masque
 -- Delayed indicates this group will be deferred to a hook or event
 -- Init is a function that will be run at load time for this group
