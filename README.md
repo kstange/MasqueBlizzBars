@@ -49,6 +49,8 @@ If you'd like to help localize this addon, please submit translations [here](htt
 
 If you're looking to skin the built-in Inventory UI elements as well, check out [Masque Blizzard Inventory](https://github.com/kstange/MasqueBlizzInv) ([CurseForge](https://www.curseforge.com/wow/addons/masque-blizz-inventory "CurseForge"), [Wago](https://addons.wago.io/addons/masqueblizzinv), [WoWInterface](https://www.wowinterface.com/downloads/info26503-MasqueBlizzardInventory.html))!
 
-## Licensing Information
+## Special Thanks
 
-The original GPL-3 code and concept was derived from [Masque Blizz Bars](https://www.curseforge.com/wow/addons/masque-blizz-bars) by Madnessbox, which is now abandoned on CurseForge.  Since that time the code has been entirely rewritten, and I have elected to relicense the addon under the MIT license as I have done with my other addons.
+Thanks to [StormFX](https://github.com/StormFX), the author of Masque, for a ton of feedback and development tips and for creating a logo for the addon.
+
+Thanks to Madnessbox, the author of the abandoned [Masque Blizz Bars](https://www.curseforge.com/wow/addons/masque-blizz-bars) for the original concept.
