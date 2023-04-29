@@ -6,6 +6,7 @@
 ## Author: SimGuy
 ## RequiredDeps: Masque
 ## SavedVariables: MasqueBlizzBars
+## IconTexture: Interface\Addons\MasqueBlizzBars\Textures\Icon.tga
 
 ## X-Curse-Project-ID: 694481
 ## X-WoWI-ID: 26502
