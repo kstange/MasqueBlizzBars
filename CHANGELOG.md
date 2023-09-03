@@ -1,10 +1,6 @@
-# Version 10.1.5.1
+# Version 10.1.7.0
 
-* Updated for Classic Era 1.14.4
-
-# Version 10.1.5.0
-
-* Updated for Retail 10.1.5
+* Updated for Retail 10.1.7
 
 # Release History
 
