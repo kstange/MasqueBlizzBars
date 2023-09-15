@@ -1,3 +1,7 @@
+# Version 10.1.7.1
+
+* Improved compatibility with Action Bars modified by MoveAny (Thanks to D4KiR for tweaks to MoveAny)
+
 # Version 10.1.7.0
 
 * Updated for Retail 10.1.7

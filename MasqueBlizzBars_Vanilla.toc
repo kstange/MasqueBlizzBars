@@ -6,6 +6,7 @@
 ## Author: SimGuy
 ## RequiredDeps: Masque
 ## SavedVariables: MasqueBlizzBars
+## OptionalDeps: MoveAny
 
 ## X-Curse-Project-ID: 694481
 ## X-WoWI-ID: 26502

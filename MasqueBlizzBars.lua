@@ -76,6 +76,15 @@ function Addon:HandleEvent(event, target)
 	end
 end
 
+-- ReSkin any action bars that are defined if needed
+function Addon:ReSkinBars()
+	for _, bar in ipairs({ "ActionBar", "MultiBarBottomLeft", "MultiBarBottomRight", "MultiBarLeft", "MultiBarRight", "MultiBar5", "MultiBar6", "MultiBar7" }) do
+		if Groups[bar] and Groups[bar].Group then
+			Groups[bar].Group:ReSkin()
+		end
+	end
+end
+
 -- Spell Flyout buttons are created as needed when a flyout is opened, so
 -- check for any new buttons any time that happens
 function Addon:SpellFlyout_Toggle(flyoutID, ...)
@@ -144,6 +153,11 @@ function Addon:Init()
 	if Core:CheckVersion({ 70003, nil }) then
 		hooksecurefunc(SpellFlyout, "Toggle",
 		               Addon.SpellFlyout_Toggle)
+	end
+
+        -- Check if MoveAny is installed and handle the bar modifications it makes
+	if UpdateActionBarBackground then
+		hooksecurefunc("UpdateActionBarBackground", Addon.ReSkinBars)
 	end
 
 	-- Zone Ability Buttons
