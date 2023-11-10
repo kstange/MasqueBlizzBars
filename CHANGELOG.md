@@ -1,3 +1,7 @@
+# Version 10.2.0.1
+
+* Added zhCN (Simplified Chinese) translation (kuaishan)
+
 # Version 10.2.0.0
 
 * Updated for Retail 10.2.0
