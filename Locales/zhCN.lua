@@ -1,7 +1,7 @@
 --
 -- Masque Blizzard Bars
 --
--- Locales\zhCN.lua -- zhTW Localization File
+-- Locales\zhCN.lua -- zhCN Localization File
 --
 -- Use of this source code is governed by an MIT-style
 -- license that can be found in the LICENSE file or at
@@ -35,4 +35,3 @@ L["Possess Bar"] = "控制条"
 L["Spell Flyouts"] = "技能弹出选项"
 L["Stance Bar"] = "姿态条"
 L["Vehicle Bar"] = "载具条"
-
