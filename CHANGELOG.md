@@ -1,5 +1,6 @@
 # Version 10.2.0.1
 
+* Updated TOC for Classic Era 1.15.0
 * Added zhCN (Simplified Chinese) translation (kuaishan)
 
 # Version 10.2.0.0
