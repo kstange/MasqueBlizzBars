@@ -78,7 +78,8 @@ end
 
 -- ReSkin any action bars that are defined if needed
 function Addon:ReSkinBars()
-	for _, bar in ipairs({ "ActionBar", "MultiBarBottomLeft", "MultiBarBottomRight", "MultiBarLeft", "MultiBarRight", "MultiBar5", "MultiBar6", "MultiBar7" }) do
+	for _, bar in ipairs({ "ActionBar", "MultiBarBottomLeft", "MultiBarBottomRight", "MultiBarLeft",
+	                       "MultiBarRight", "MultiBar5", "MultiBar6", "MultiBar7" }) do
 		if Groups[bar] and Groups[bar].Group then
 			Groups[bar].Group:ReSkin()
 		end
