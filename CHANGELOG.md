@@ -1,11 +1,6 @@
-# Version 10.2.0.1
+# Version 10.2.5.0
 
-* Updated TOC for Classic Era 1.15.0
-* Added zhCN (Simplified Chinese) translation (kuaishan)
-
-# Version 10.2.0.0
-
-* Updated for Retail 10.2.0
+* Updated TOC for Retail 10.2.5
 
 # Release History
 
