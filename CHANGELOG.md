@@ -1,3 +1,8 @@
+# Version 10.2.6.1
+
+* Added TOC for Cata Classic 4.4.0
+* Compatibility updates for Cata Classic
+
 # Version 10.2.6.0
 
 * Updated TOC for Retail 10.2.6

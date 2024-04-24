@@ -1,0 +1,20 @@
+## Interface: 40400
+## Version: @project-version@
+## Title: Masque Blizzard Bars
+## Notes: Enables Masque to skin the built-in action bars
+## Notes-zhCN: 请启用 Masque 插件来更改遊戏內置动作条的按钮外观
+## Notes-zhTW: 請啟用 Masque 插件來更改遊戲內鍵快捷列的按鈕外觀。
+## Author: SimGuy
+## RequiredDeps: Masque
+## SavedVariables: MasqueBlizzBars
+## OptionalDeps: MoveAny
+
+## X-Curse-Project-ID: 694481
+## X-WoWI-ID: 26502
+## X-Wago-ID: e56nWDK9
+
+Libs\Libs.xml
+Locales\Locales.xml
+Metadata.lua
+Core.lua
+MasqueBlizzBars.lua

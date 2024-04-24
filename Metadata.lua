@@ -136,7 +136,7 @@ Metadata.Groups = {
 	ExtraAbilityContainer = {
 		Title = "Extra Ability Buttons",
 		Notes = L["NOTES_EXTRA_ABILITY_BUTTONS"],
-		Versions = { 40300, nil },
+		Versions = { 50004, nil },
 
 		-- Keep track of the frames that have been processed
 		State = {
@@ -144,7 +144,7 @@ Metadata.Groups = {
 			ZoneAbilityButton = {}
 		},
 		Buttons = {
-			-- These buttons exist until the first time
+			-- These buttons don't exist until the first time
 			-- they're used so we'll pick them up later
 		}
 	},

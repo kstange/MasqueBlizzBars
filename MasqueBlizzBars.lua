@@ -172,7 +172,12 @@ function Addon:Init()
 	Addon.Events = CreateFrame("Frame")
 
 	-- Extra Action Button
-	if Core:CheckVersion({ 40300, nil }) then
+	--
+	-- This was added in 40300, but in Cata Classic it's not in 40400.
+	-- It'll probably be added when Dragon Soul is released since it's needed
+	-- for Ultraxion but I have no way to know what version that will be yet.
+	--
+	if Core:CheckVersion({ 50004, nil }) then
 		Addon.Events:RegisterEvent("UPDATE_EXTRA_ACTIONBAR")
 	end
 
