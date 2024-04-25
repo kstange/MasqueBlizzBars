@@ -31,9 +31,11 @@ Classic is missing many features from Retail, so unsupported groups will not app
 * Possess Bar
 * Stance Bar
 * Pet Bar
-* Vehicle Bar (Wrath Classic only)
+* Vehicle Bar (Wrath Classic and Cataclysm Classic only)
 
-I've done limited testing with Classic Era and Wrath Classic because I don't play them, but I believe everything should work.  If you report bugs or submit patches, I'll do my best to address them.
+The Extra Action Button was originally added in Cataclysm, but is not yet implemented in Cataclysm Classic. I will enable support for it once Blizzard enables it.
+
+I've done limited testing with Classic Era, Wrath Classic, and Cataclysm Classic because I don't play them, but I believe everything should work.  If you report bugs or submit patches, I'll do my best to address them.
 
 ## Compatibility
 

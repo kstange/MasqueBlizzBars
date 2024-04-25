@@ -1,7 +1,7 @@
 # Version 10.2.6.1-beta
 
-* Added TOC for Cata Classic 4.4.0
-* Improved compatibility with Cata Classic
+* Added TOC for Cataclysm Classic 4.4.0
+* Improved compatibility with Cataclysm Classic
 
 # Version 10.2.6.0
 
