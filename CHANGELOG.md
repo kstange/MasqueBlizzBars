@@ -1,7 +1,7 @@
-# Version 10.2.6.1
+# Version 10.2.6.1-beta
 
 * Added TOC for Cata Classic 4.4.0
-* Compatibility updates for Cata Classic
+* Improved compatibility with Cata Classic
 
 # Version 10.2.6.0
 
