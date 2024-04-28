@@ -1,3 +1,7 @@
+# Version 10.2.7.0
+
+* Updated TOC for Retail 10.2.7
+
 # Version 10.2.6.1-beta
 
 * Added TOC for Cataclysm Classic 4.4.0
