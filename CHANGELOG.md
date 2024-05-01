@@ -1,3 +1,7 @@
+# Version 10.2.7.0
+
+* Updated TOC for Retail 10.2.7
+
 # Version 10.2.6.2
 
 * Updated TOC for Classic Era 1.15.2
