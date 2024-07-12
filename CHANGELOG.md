@@ -1,11 +1,8 @@
 # Version 11.0.0.0
 
 * Updated TOC for Classic Era 1.15.3
+* Updated TOC for Retail 11.0.0 (PTR)
 * Updated TOC for Retail 11.0.2 (beta)
-
-# Version 10.2.7.1
-
-* Updated TOC for Retail 11.0.0
 
 # Version 10.2.7.0
 
