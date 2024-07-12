@@ -97,7 +97,7 @@ function Core:MakeRegions(button, map)
 
 	local regions = {}
 	for region, key in pairs(map) do
-		local frame = button[key]
+		local frame = button and button[key]
 		if frame then
 			-- If this is a function, call it now to get
 			-- the object for the Masque region, otherwise
@@ -189,6 +189,21 @@ function Core:Skin(buttons, group, bclass, slots, parent, prefix)
 				if slots then
 					buttons[button] = slots
 				end
+			end
+		end
+	end
+end
+
+-- In 11.0 Blizzard added an itemButtonPool concept which makes finding all the
+-- buttons in a container really easy.
+function Core:SkinButtonPool(pools, group)
+	for _, frame in ipairs(pools) do
+		if frame.itemButtonPool then
+			for button in frame.itemButtonPool:EnumerateActive() do
+				-- TODO These should always be ItemButtons by
+				-- nature of Blizzard code, but support regions
+				-- just in case.
+				group:AddButton(button, nil, "Item")
 			end
 		end
 	end
