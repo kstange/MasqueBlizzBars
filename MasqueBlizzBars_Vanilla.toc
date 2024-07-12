@@ -1,4 +1,4 @@
-## Interface: 11502
+## Interface: 11503
 ## Version: @project-version@
 ## Title: Masque Blizzard Bars
 ## Notes: Enables Masque to skin the built-in action bars
