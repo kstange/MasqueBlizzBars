@@ -10,15 +10,15 @@ You can install this addon from [CurseForge](https://www.curseforge.com/wow/addo
 
 Masque Blizzard Bars can currently skin the following bars:
 
-* Main Action Bar
-* Multi Bars (Action Bars 2 - 8)
-* Possess Bar
-* Stance Bar
-* Pet Bar
-* Vehicle Bar
-* Pet Battle Bar
-* Extra Ability Buttons (Extra Action Button, Zone Ability Button)
-* Spell Flyout
+- Main Action Bar
+- Multi Bars (Action Bars 2 - 8)
+- Possess Bar
+- Stance Bar
+- Pet Bar
+- Vehicle Bar
+- Pet Battle Bar
+- Extra Ability Buttons (Extra Action Button, Zone Ability Button)
+- Spell Flyout
 
 Each bar type is its own group so you can configure them independently from Masque's Skin Settings.
 
@@ -26,16 +26,16 @@ Each bar type is its own group so you can configure them independently from Masq
 
 Classic is missing many features from Retail, so unsupported groups will not appear in Masque options. Currently, only the following elements are supported by the game:
 
-* Main Action Bar
-* Multi Bars (Action Bars 2 - 5)
-* Possess Bar
-* Stance Bar
-* Pet Bar
-* Vehicle Bar (Wrath Classic and Cataclysm Classic only)
+- Main Action Bar
+- Multi Bars (Action Bars 2 - 5)
+- Possess Bar
+- Stance Bar
+- Pet Bar
+- Vehicle Bar (Cataclysm Classic only)
 
 The Extra Action Button was originally added in Cataclysm, but is not yet implemented in Cataclysm Classic. I will enable support for it once Blizzard enables it.
 
-I've done limited testing with Classic Era, Wrath Classic, and Cataclysm Classic because I don't play them, but I believe everything should work.  If you report bugs or submit patches, I'll do my best to address them.
+I've done limited testing with Classic Era and Cataclysm Classic because I don't play them, but I believe everything should work.  If you report bugs or submit patches, I'll do my best to address them.
 
 ## Compatibility
 
