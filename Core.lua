@@ -203,7 +203,10 @@ function Core:SkinButtonPool(pools, group)
 				-- TODO These should always be ItemButtons by
 				-- nature of Blizzard code, but support regions
 				-- just in case.
-				group:AddButton(button, nil, "Item")
+				if not button[AddonName.."Skinned"] then
+					group:AddButton(button, nil, "Item")
+					button[AddonName.."Skinned"] = true
+				end
 			end
 		end
 	end
