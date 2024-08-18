@@ -2,7 +2,7 @@
 -- Masque Blizzard Bars
 -- Enables Masque to skin the built-in WoW action bars
 --
--- Copyright 2022 - 2023 SimGuy
+-- Copyright 2022 - 2024 SimGuy
 --
 -- Use of this source code is governed by an MIT-style
 -- license that can be found in the LICENSE file or at
