@@ -1,3 +1,9 @@
+# Version 11.0.5.0
+
+- Updated TOC for Retail 11.0.5 (PTR)
+- Updated TOC for Cataclysm Classic 4.4.1 (PTR)
+- Updated TOC for Classic Era 1.15.4
+
 # Version 11.0.0.0
 
 - Updated TOC for Classic Era 1.15.3
