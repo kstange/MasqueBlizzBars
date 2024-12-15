@@ -1,7 +1,7 @@
 # Version 11.0.7.0
 
-- Update TOC for Retail 11.0.7
-- Update TOC for Classic Era 1.15.5
+- Updated TOC for Retail 11.0.7
+- Updated TOC for Classic Era 1.15.5
 
 # Version 11.0.5.0
 
