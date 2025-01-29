@@ -2,6 +2,7 @@
 
 - Updated TOC for Retail 11.1.0 (PTR)
 - Updated TOC for Classic Era 1.15.6
+- Updated TOC for Cataclysm Classic 4.4.2 (PTR)
 - Added ruRU (Russian) translation from ZamestoTV
 
 # Release History
