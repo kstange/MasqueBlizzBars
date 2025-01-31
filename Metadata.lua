@@ -130,6 +130,13 @@ Metadata.Groups = {
 			-- it's not included here
 		}
 	},
+	ExtraActionButton = {
+		Title = "Extra Action Button",
+		Versions = { 40402, 50004 },
+		Buttons = {
+			ExtraActionButton = 1
+		}
+	},
 	ExtraAbilityContainer = {
 		Title = "Extra Ability Buttons",
 		Notes = L["NOTES_EXTRA_ABILITY_BUTTONS"],

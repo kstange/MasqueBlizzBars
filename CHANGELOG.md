@@ -1,3 +1,7 @@
+# Version 11.1.0.1
+
+- Added support for Extra Action Button in Cataclysm Classic
+
 # Version 11.1.0.0
 
 - Updated TOC for Retail 11.1.0 (PTR)
