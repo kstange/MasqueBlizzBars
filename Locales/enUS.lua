@@ -33,7 +33,6 @@ local L = Shared.Locale
 --L["Spell Flyouts"] = "Spell Flyouts"
 --L["Vehicle Bar"] = "Vehicle Bar"
 --L["Extra Ability Buttons"] = "Extra Ability Buttons"
---L["Extra Action Button"] = "Extra Action Button"
 --L["Pet Battle Bar"] = "Pet Battle Bar"
 
 -- Using short keys for these long strings, so enUS needs to be defined as well
