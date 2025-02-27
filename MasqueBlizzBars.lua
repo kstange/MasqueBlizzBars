@@ -94,7 +94,7 @@ end
 
 -- Spell Flyout buttons are created as needed when a flyout is opened, so
 -- check for any new buttons any time that happens
-function Addon:SpellFlyout_Toggle(flyoutID)
+function Addon:SpellFlyout_Toggle(_, flyoutID)
 	local _, _, numSlots, _ = GetFlyoutInfo(flyoutID)
 	local activeSlots = 0
         for slot = 1, numSlots do
@@ -110,7 +110,7 @@ function Addon:SpellFlyout_Toggle(flyoutID)
         if (numButtons < activeSlots) then
 		for i = numButtons + 1, activeSlots do
 			-- TODO: Update this to use Core:Skin()
-			bar.Group:AddButton(_G["SpellFlyoutButton"..i])
+			bar.Group:AddButton(_G["SpellFlyoutPopupButton"..i])
 		end
 		bar.Buttons.SpellFlyoutButton = activeSlots
 	end

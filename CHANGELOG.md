@@ -1,3 +1,7 @@
+# Version 11.1.0.2
+
+- Fixed handling of Spell Flyouts in Retail 11.1.0
+
 # Version 11.1.0.1
 
 - Added support for Extra Action Button in Cataclysm Classic
