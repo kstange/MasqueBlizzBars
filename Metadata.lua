@@ -34,6 +34,7 @@ Metadata.MasqueFriendlyName = "Blizzard Action Bars"
 --  If  0, this is a dynamic frame to be skinned later
 --  If >0, attempt to loop through frames with the name prefix suffixed with
 --  the integer range
+-- ButtonPools should reference parent frames containing an itemButtonPool
 -- State can be used for storing information about special buttons
 Metadata.Groups = {
 	ActionBar = {
