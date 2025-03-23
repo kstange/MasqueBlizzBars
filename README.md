@@ -19,6 +19,7 @@ Masque Blizzard Bars can currently skin the following bars:
 - Pet Battle Bar
 - Extra Ability Buttons (Extra Action Button, Zone Ability Button)
 - Spell Flyout
+- Cooldown Manager
 
 Each bar type is its own group so you can configure them independently from Masque's Skin Settings.
 
@@ -32,8 +33,7 @@ Classic is missing many features from Retail, so unsupported groups will not app
 - Stance Bar
 - Pet Bar
 - Vehicle Bar (Cataclysm Classic only)
-
-The Extra Action Button was originally added in Cataclysm, but is not yet implemented in Cataclysm Classic. I will enable support for it once Blizzard enables it.
+- Extra Action Button (Cataclysm Classic only)
 
 I've done limited testing with Classic Era and Cataclysm Classic because I don't play them, but I believe everything should work.  If you report bugs or submit patches, I'll do my best to address them.
 
