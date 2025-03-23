@@ -1,3 +1,7 @@
+# Version 11.1.0.3
+
+- Updated TOC for Classic Era 1.15.7 (PTR)
+
 # Version 11.1.0.2
 
 - Fixed handling of Spell Flyouts in Retail 11.1.0
