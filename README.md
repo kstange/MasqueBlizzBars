@@ -29,15 +29,15 @@ Classic is missing many features from Retail, so unsupported groups will not app
 
 - Main Action Bar
 - Multi Bars (Action Bars 2 - 5)
+- Multi Bars (Action Bars 6 - 8, Burning Crusade Classic only)
 - Possess Bar
 - Stance Bar
 - Pet Bar
-- Vehicle Bar (Pandaria Classic only)
-- Pet Battle Bar (Panadria Classic only)
-- Extra Action Button (Pandaria Classic only)
-- Spell Flyout (Pandaria Classic only)
+- Vehicle Bar (Wrath Classic and later)
+- Extra Action Button (Cataclysm Classic and later)
+- Pet Battle Bar (Panadria Classic and later)
 
-I've done limited testing with Classic Era and Pandaria Classic because I don't play them, but I believe everything should work.  If you report bugs or submit patches, I'll do my best to address them.
+I've done limited testing with Classic versions because I don't play them, but I believe everything should work.  If you report bugs or submit patches, I'll do my best to address them.
 
 ## Compatibility
 
