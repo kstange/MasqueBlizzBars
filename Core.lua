@@ -227,13 +227,16 @@ end
 -- and the high number (exclusive) for implementations that are dependent upon
 -- client version.
 function Core:CheckVersion(versions)
-	if not versions or
-	   (versions and
-	    (not versions[1] or ver >= versions[1]) and
-	    (not versions[2] or ver <  versions[2])
-	   ) then
+	if not versions then
 		return true
 	else
+		for i = 1, #versions, 2 do
+			print(versions[i], versions[i+1])
+			if (not versions[i]   or ver >= versions[i]) and
+			   (not versions[i+1] or ver <  versions[i+1]) then
+				return true
+			end
+		end
 		return false
 	end
 end

@@ -28,6 +28,7 @@ Metadata.MasqueFriendlyName = "Blizzard Action Bars"
 -- Versions specifies which WoW clients this group supports:
 --  To match it must be >= low and < high.
 --  High number is the first interface unsupported
+--  This can be repeated for multiple ranges
 -- Buttons should contain a list of frame names with an integer value
 --  If -2, assume to be a function that returns a table of buttons
 --  If -1, assume to be a singular button with that name
@@ -71,24 +72,24 @@ Metadata.Groups = {
 			MultiBarRightButton = NUM_MULTIBAR_BUTTONS
 		}
 	},
-	-- Three new bars for 10.0.0
+	-- Three new bars for 10.0.0, also added in 2.5.5
 	MultiBar5 = {
 		Title = "Action Bar 6",
-		Versions = { 100000, nil },
+		Versions = { 20505, 30000, 100000, nil },
 		Buttons = {
 			MultiBar5Button = NUM_MULTIBAR_BUTTONS
 		}
 	},
 	MultiBar6 = {
 		Title = "Action Bar 7",
-		Versions = { 100000, nil },
+		Versions = { 20505, 30000, 100000, nil },
 		Buttons = {
 			MultiBar6Button = NUM_MULTIBAR_BUTTONS
 		}
 	},
 	MultiBar7 = {
 		Title = "Action Bar 8",
-		Versions = { 100000, nil },
+		Versions = { 20505, 30000, 100000, nil },
 		Buttons = {
 			MultiBar7Button = NUM_MULTIBAR_BUTTONS
 		}
