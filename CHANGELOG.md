@@ -1,3 +1,7 @@
+# Version 11.2.7.1
+
+- Improved handling of Cooldown Manager for Midnight
+
 # Version 11.2.7.0
 
 - Added support for ActionBars 6 - 8 on Burning Crusade Classic

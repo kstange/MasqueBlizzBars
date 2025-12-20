@@ -118,6 +118,15 @@ function Addon:CooldownViewer_RefreshLayout()
 	if frameName and Groups.CooldownViewer.Buttons[frameName] then
 		-- Map the Mask to a key and hide the overlay
 		for _, frame in ipairs(self:GetItemFrames()) do
+			if frame.ChargeCount and frame.ChargeCount.Current and not frame.Count then
+				frame.Count = frame.ChargeCount.Current
+			end
+			if frame.Applications and frame.Applications.Applications and not frame.Count then
+				frame.Count = frame.Applications.Applications
+			end
+			if frame.DebuffBorder and frame.DebuffBorder.Texture and not frame.DebuffBorderMBB then
+				frame.DebuffBorderMBB = frame.DebuffBorder.Texture
+			end
 			if not frame.Mask then
 				frame.Mask = frame.Icon:GetMaskTexture(1)
 			end
@@ -130,6 +139,7 @@ function Addon:CooldownViewer_RefreshLayout()
 					end
 				end
 			end
+			frame.Mask:Hide()
 			frame.IconOverlay:Hide()
 		end
 		Core:Skin(Groups.CooldownViewer.Buttons[frameName], Groups.CooldownViewer.Group, nil, nil, self, frameName)

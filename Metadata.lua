@@ -185,14 +185,20 @@ Metadata.Groups = {
 local CooldownViewerMap = {
 	Icon = "Icon",
 	Cooldown = "Cooldown",
-	Count = "ChargeCount.Current",
-	Mask = "Mask"
+	Count = "Count"
+}
+
+local BuffIconViewerMap = {
+	Icon = "Icon",
+	Cooldown = "Cooldown",
+	Count = "Count",
+	Border = "DebuffBorderMBB"
 }
 
 Metadata.Types = {
 	-- This will be passed for all buttons unless it's otherwise overridden
 	DEFAULT = { type = "Action" },
-	BuffIconCooldownViewerGetItemFrames = { type = "Action", map = CooldownViewerMap },
+	BuffIconCooldownViewerGetItemFrames = { type = "Debuff", map = BuffIconViewerMap },
 	EssentialCooldownViewerGetItemFrames = { type = "Action", map = CooldownViewerMap },
 	UtilityCooldownViewerGetItemFrames = { type = "Action", map = CooldownViewerMap }
 }
