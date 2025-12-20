@@ -192,7 +192,7 @@ local BuffIconViewerMap = {
 	Icon = "Icon",
 	Cooldown = "Cooldown",
 	Count = "Count",
-	Border = "DebuffBorderMBB"
+	DebuffBorder = "DebuffBorderMBB"
 }
 
 Metadata.Types = {
