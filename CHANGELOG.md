@@ -7,7 +7,7 @@
 
 # Feature Notes
 
-- There's currently no way to support Pandemic or Alert Visual effects on the Tracked Buffs bar due to lack of Masque support
+- There's currently no way to support Pandemic or Visual Alert effects on the Tracked Buffs bar due to lack of Masque support
 - Since it appears that Masque Skinner: Blizz Buffs is no longer maintained, I hope to add support for Buffs, Debuffs, and External Defensives in an uncoming release
 
 # Release History
