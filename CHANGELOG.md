@@ -1,8 +1,8 @@
 # Version 12.0.0.0
 
-- Improved support for Cooldown Manager in Retail 12.0.0
-- Added support for coloring debuffs in the Tracked Buffs in Retail 12.0.0
-- Split the Cooldown Manager group into separate groups (Tracked Buffs, Essential Cooldowns, and Utility Cooldowns) so they can be skinned separately
+- Added support for coloring debuff types on Tracked Buffs in Retail 12.0.0 (fixes #6)
+- Split the Cooldown Manager group into Tracked Buffs, Essential Cooldowns, and Utility Cooldowns (fixes #7)
+- Updated TOC for Retail 12.0.1 (Beta)
 
 # Version 11.2.7.0
 
