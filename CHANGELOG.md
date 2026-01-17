@@ -3,6 +3,7 @@
 - Added support for coloring debuff types on Tracked Buffs in Retail 12.0.0 (fixes #6)
 - Split the Cooldown Manager group into Tracked Buffs, Essential Cooldowns, and Utility Cooldowns (fixes #7)
 - Updated TOC for Retail 12.0.1 (Beta)
+- Note: There's currently no way to support the Pandemic or Alert Visual effects due to lack of Masque support
 
 # Version 11.2.7.0
 

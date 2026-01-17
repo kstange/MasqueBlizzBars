@@ -142,6 +142,12 @@ function Addon:CooldownViewer_RefreshLayout()
 					end
 				end
 			end
+			if Core:CheckVersion({ 120000, nil }) then
+				hooksecurefunc(frame, "ShowPandemicStateFrame",
+				               Addon.CooldownViewerItem_ShowPandemicStateFrame)
+				hooksecurefunc(frame, "HidePandemicStateFrame",
+				               Addon.CooldownViewerItem_HidePandemicStateFrame)
+			end
 
 			local groupDisabled = Groups[frameName].Group.db.Disabled
 			frame.Mask:SetShown(groupDisabled)
@@ -170,23 +176,19 @@ function Addon:CooldownViewerItem_RefreshIconBorder()
 	end
 end
 
---[[
-function Addon:CooldownViewerItemDebuffBorder_UpdateFromAuraData(_)
-	local frame = self:GetParent()
-	local frameName = frame:GetParent():GetName()
-	if frameName and Groups[frameName] and Groups[frameName].Buttons[frameName] then
-		if frame.DebuffBorder then
-			local atlas = frame.DebuffBorder.Texture:GetAtlas()
-			local r, g, b,a = frame.DebuffBorder.Texture:GetVertexColor()
-			if atlas then
-				frame.DebuffBorderMBB:SetVertexColor(1, 0, 0, 1)
-				local _, _, _, debuff, _ = strsplit("-", atlas)
-				print(atlas, debuff, r, g, b, a)
-			end
+function Addon:CooldownViewerItem_ShowPandemicStateFrame()
+	local frame = self
+	if frame and frame.DebuffBorderMBB and frame.PandemicIcon then
+		local frameName = frame:GetParent():GetName()
+		local groupDisabled = Groups[frameName].Group.db.Disabled
+		if not groupDisabled then
+			-- TODO: Handle Pandemic Overlay?
 		end
 	end
 end
---]]
+
+function Addon:CooldownViewerItem_HidePandemicStateFrame()
+end
 
 -- Attempt to adopt the ZoneAbilityButton, which has no name, when Blizzard
 -- tries to update the displayed buttons. We do this here because when
