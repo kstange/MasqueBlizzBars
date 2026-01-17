@@ -115,17 +115,20 @@ end
 
 function Addon:CooldownViewer_RefreshLayout()
 	local frameName = self:GetName()
-	if frameName and Groups.CooldownViewer.Buttons[frameName] then
+	if frameName and Groups[frameName] and Groups[frameName].Buttons[frameName] then
 		-- Map the Mask to a key and hide the overlay
-		for _, frame in ipairs(self:GetItemFrames()) do
+		for frame in self.itemFramePool:EnumerateActive() do
 			if frame.ChargeCount and frame.ChargeCount.Current and not frame.Count then
 				frame.Count = frame.ChargeCount.Current
 			end
 			if frame.Applications and frame.Applications.Applications and not frame.Count then
 				frame.Count = frame.Applications.Applications
 			end
-			if frame.DebuffBorder and frame.DebuffBorder.Texture and not frame.DebuffBorderMBB then
-				frame.DebuffBorderMBB = frame.DebuffBorder.Texture
+			if frame.DebuffBorder and not frame.DebuffBorderMBB then
+				frame.DebuffBorderMBB = frame:CreateTexture(nil, "ARTWORK", nil, 0)
+				frame.DebuffBorderMBB:SetVertexColor(0, 0, 0, 0)
+				hooksecurefunc(frame, "RefreshIconBorder",
+				               Addon.CooldownViewerItem_RefreshIconBorder)
 			end
 			if not frame.Mask then
 				frame.Mask = frame.Icon:GetMaskTexture(1)
@@ -139,12 +142,51 @@ function Addon:CooldownViewer_RefreshLayout()
 					end
 				end
 			end
-			frame.Mask:Hide()
-			frame.IconOverlay:Hide()
+
+			local groupDisabled = Groups[frameName].Group.db.Disabled
+			frame.Mask:SetShown(groupDisabled)
+			frame.IconOverlay:SetShown(groupDisabled)
+			if frame.DebuffBorder then
+				frame.DebuffBorder.Texture:SetShown(groupDisabled)
+			end
 		end
-		Core:Skin(Groups.CooldownViewer.Buttons[frameName], Groups.CooldownViewer.Group, nil, nil, self, frameName)
+
+		Core:Skin(Groups[frameName].Buttons[frameName], Groups[frameName].Group, nil, nil, self, frameName)
 	end
 end
+
+function Addon:CooldownViewerItem_RefreshIconBorder()
+	local frame = self
+        if frame and frame.DebuffBorderMBB then
+		local frameName = frame:GetParent():GetName()
+		local groupDisabled = Groups[frameName].Group.db.Disabled
+		frame.DebuffBorder.Texture:SetShown(groupDisabled)
+		if frame.auraInstanceID and frame.auraDataUnit == "target" and not groupDisabled then
+			local color = C_UnitAuras.GetAuraDispelTypeColor(frame.auraDataUnit, frame.auraInstanceID, Addon.DispelCurve)
+			frame.DebuffBorderMBB:SetVertexColor(color.r, color.g, color.b, color.a)
+		else
+			frame.DebuffBorderMBB:SetVertexColor(0, 0, 0, 0)
+		end
+	end
+end
+
+--[[
+function Addon:CooldownViewerItemDebuffBorder_UpdateFromAuraData(_)
+	local frame = self:GetParent()
+	local frameName = frame:GetParent():GetName()
+	if frameName and Groups[frameName] and Groups[frameName].Buttons[frameName] then
+		if frame.DebuffBorder then
+			local atlas = frame.DebuffBorder.Texture:GetAtlas()
+			local r, g, b,a = frame.DebuffBorder.Texture:GetVertexColor()
+			if atlas then
+				frame.DebuffBorderMBB:SetVertexColor(1, 0, 0, 1)
+				local _, _, _, debuff, _ = strsplit("-", atlas)
+				print(atlas, debuff, r, g, b, a)
+			end
+		end
+	end
+end
+--]]
 
 -- Attempt to adopt the ZoneAbilityButton, which has no name, when Blizzard
 -- tries to update the displayed buttons. We do this here because when
@@ -192,7 +234,7 @@ function Addon:Init()
 		               Addon.SpellFlyout_Toggle)
 	end
 
-	-- Cooldown Viewer
+	-- Cooldown Manager
 	if Core:CheckVersion({ 110105, nil }) then
 		hooksecurefunc(BuffIconCooldownViewer, "RefreshLayout",
 		               Addon.CooldownViewer_RefreshLayout)
@@ -200,6 +242,16 @@ function Addon:Init()
 		               Addon.CooldownViewer_RefreshLayout)
 		hooksecurefunc(UtilityCooldownViewer, "RefreshLayout",
 		               Addon.CooldownViewer_RefreshLayout)
+	end
+	if Core:CheckVersion({ 120000, nil }) then
+		Addon.DispelCurve = C_CurveUtil.CreateColorCurve()
+		Addon.DispelCurve:SetType(Enum.LuaCurveType.Step)
+		Addon.DispelCurve:AddPoint(0, CreateColor(0.800, 0.000, 0.000, 1))
+		Addon.DispelCurve:AddPoint(1, CreateColor(0.000, 0.505, 1.000, 1))
+		Addon.DispelCurve:AddPoint(2, CreateColor(0.624, 0.023, 0.894, 1))
+		Addon.DispelCurve:AddPoint(3, CreateColor(0.945, 0.416, 0.035, 1))
+		Addon.DispelCurve:AddPoint(4, CreateColor(0.482, 0.780, 0.000, 1))
+		Addon.DispelCurve:AddPoint(5, CreateColor(0.721, 0.000, 0.059, 1))
 	end
 
         -- Check if MoveAny is installed and handle the bar modifications it makes

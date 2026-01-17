@@ -161,8 +161,8 @@ Metadata.Groups = {
 			-- battle
 		}
 	},
-	CooldownViewer = {
-		Title = "Cooldown Manager",
+	BuffIconCooldownViewer = {
+		Title = "Tracked Buffs",
 		Versions = { 110105, nil },
 		-- These are populated after the UI loads when the RefreshLayout
 		-- function is called
@@ -170,10 +170,28 @@ Metadata.Groups = {
 		Buttons = {
 			BuffIconCooldownViewer = {
 				GetItemFrames = -2
-			},
+			}
+		}
+	},
+	EssentialCooldownViewer = {
+		Title = "Essential Cooldowns",
+		Versions = { 110105, nil },
+		-- These are populated after the UI loads when the RefreshLayout
+		-- function is called
+		Delayed = true,
+		Buttons = {
 			EssentialCooldownViewer = {
 				GetItemFrames = -2
-			},
+			}
+		}
+	},
+	UtilityCooldownViewer = {
+		Title = "Utility Cooldowns",
+		Versions = { 110105, nil },
+		-- These are populated after the UI loads when the RefreshLayout
+		-- function is called
+		Delayed = true,
+		Buttons = {
 			UtilityCooldownViewer = {
 				GetItemFrames = -2
 			}
