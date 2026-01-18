@@ -1,6 +1,6 @@
 # About Masque Blizzard Bars
 
-This addon enables [Masque](https://github.com/SFX-WoW/Masque) ([CurseForge](https://www.curseforge.com/wow/addons/masque), [Wago](https://addons.wago.io/addons/masque), [WoWInterface](https://www.wowinterface.com/downloads/info12097-Masque.html)) to skin the built-in WoW action bars.  An up-to-date version of Masque is required for it to work.
+This addon enables [Masque](https://github.com/SFX-WoW/Masque) ([CurseForge](https://www.curseforge.com/wow/addons/masque), [Wago](https://addons.wago.io/addons/masque), [WoWInterface](https://www.wowinterface.com/downloads/info12097-Masque.html)) to skin the built-in WoW action bars.
 
 If you like the base WoW interface and don't want to use a separate action bar mod, you're in the right place.
 
@@ -44,7 +44,7 @@ If you'd like to see Masque support in a conflicting addon, try sending a featur
 
 If you'd like to help localize this addon, please submit translations [here](https://www.curseforge.com/wow/addons/masque-blizz-bars-revived/localization).
 
-## Other Mods
+## Other Addons
 
 If you want to skin built-in Inventory UI elements as well, check out [Masque Blizzard Inventory](https://github.com/kstange/MasqueBlizzInv) ([CurseForge](https://www.curseforge.com/wow/addons/masque-blizz-inventory "CurseForge"), [Wago](https://addons.wago.io/addons/masqueblizzinv), [WoWInterface](https://www.wowinterface.com/downloads/info26503-MasqueBlizzardInventory.html))!
 
