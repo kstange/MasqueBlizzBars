@@ -46,7 +46,7 @@ If you'd like to help localize this addon, please submit translations [here](htt
 
 ## Other Addons
 
-If you want to skin built-in Inventory UI elements as well, check out [Masque Blizzard Inventory](https://github.com/kstange/MasqueBlizzInv) ([CurseForge](https://www.curseforge.com/wow/addons/masque-blizz-inventory "CurseForge"), [Wago](https://addons.wago.io/addons/masqueblizzinv), [WoWInterface](https://www.wowinterface.com/downloads/info26503-MasqueBlizzardInventory.html))!
+If you want to skin built-in Inventory UI elements as well, check out [Masque Blizzard Inventory](https://github.com/kstange/MasqueBlizzInv) ([CurseForge](https://www.curseforge.com/wow/addons/masque-blizz-inventory), [Wago](https://addons.wago.io/addons/masqueblizzinv), [WoWInterface](https://www.wowinterface.com/downloads/info26503-MasqueBlizzardInventory.html))!
 
 ## Special Thanks
 
