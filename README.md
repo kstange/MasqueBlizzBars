@@ -52,4 +52,4 @@ If you want to skin built-in Inventory UI elements as well, check out [Masque Bl
 
 Thanks to [StormFX](https://github.com/StormFX), the author of Masque, for a ton of feedback and development tips and for creating a logo for the addon.
 
-Thanks to Madnessbox, the author of the abandoned [Masque Blizz Bars](https://www.curseforge.com/wow/addons/masque-blizz-bars) for the original concept.
+Thanks to Madnessbox, the author of the original Masque Blizz Bars addon, for the concept.
