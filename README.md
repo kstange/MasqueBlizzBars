@@ -32,9 +32,7 @@ Each bar type is its own group so you can configure them independently from Masq
 
 Classic versions available in the US are fully supported. Bars not available in Classic will not appear in Masque's Skin Settings.
 
-I don't play Classic so testing is somewhat limited. I also haven't been able to validate compatibility with Titan Reforged servers in China.
-
-I'll do my best to address bug reports promptly.
+I don't play Classic so testing is somewhat limited, but I'll do my best to address bug reports promptly.
 
 ## Compatibility
 
