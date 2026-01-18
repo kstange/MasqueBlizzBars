@@ -30,7 +30,7 @@ Each bar type is its own group so you can configure them independently from Masq
 
 ## Classic Support
 
-Bars that exist in Classic versions available in the US are fully supported. Unsupported bars will not appear in Masque's Skin Settings.
+Bars that exist in Classic versions available in the US are fully supported. Bars not available in Classic will not appear in Masque's Skin Settings.
 
 I don't play Classic so testing is somewhat limited. I also haven't been able to validate compatibility with Titan Reforged servers in China.
 
