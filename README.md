@@ -8,7 +8,7 @@ You can install this addon from [CurseForge](https://www.curseforge.com/wow/addo
 
 ## Features
 
-Masque Blizzard Bars can currently skin the following bars:
+Masque Blizzard Bars can currently skin the following bars, according to your game version:
 
 - Main Action Bar
 - Multi Bars (Action Bars 2 - 8)
@@ -17,31 +17,28 @@ Masque Blizzard Bars can currently skin the following bars:
 - Pet Bar
 - Vehicle Bar
 - Pet Battle Bar
-- Extra Ability Buttons (Extra Action Button, Zone Ability Button)
+- Extra Ability Buttons (Extra Action Button, Zone Ability Buttons)
 - Spell Flyout
-- Cooldown Manager
+- Cooldown Manager (with each bar type configured indepdendently)
+  - Essential Cooldowns
+  - Utility Cooldowns
+  - Tracked Buffs
+
+Support for Buffs, Debuffs and External Defensives is planned in a future update.
 
 Each bar type is its own group so you can configure them independently from Masque's Skin Settings.
 
 ## Classic Support
 
-Classic is missing many features from Retail, so unsupported groups will not appear in Masque options. Currently, only the following elements are supported by the game:
+Bars that exist in Classic versions available in the US are fully supported. Unsupported bars will not appear in Masque's Skin Settings.
 
-- Main Action Bar
-- Multi Bars (Action Bars 2 - 5)
-- Multi Bars (Action Bars 6 - 8, Burning Crusade Classic only)
-- Possess Bar
-- Stance Bar
-- Pet Bar
-- Vehicle Bar (Wrath Classic and later)
-- Extra Action Button (Cataclysm Classic and later)
-- Pet Battle Bar (Panadria Classic and later)
+I don't play Classic so testing is somewhat limited. I also haven't been able to validate compatibility with Titan Reforged servers in China.
 
-I've done limited testing with Classic versions because I don't play them, but I believe everything should work.  If you report bugs or submit patches, I'll do my best to address them.
+I'll do my best to address bug reports promptly.
 
 ## Compatibility
 
-This addon is not intended to apply Masque skins over addons that replace or heavily modify parts of the base interface and may conflict with them.  If you experience a conflict, use Masque's Skin Settings to disable the affected group and reload your UI. This should allow the other addon to control the interface without interference.
+This addon is intended to skin the base WoW interface. Addons that heavily modify parts of the base interface may conflict. If you experience a conflict, use Masque's Skin Settings to disable the affected group and reload your UI. This should allow the other addon to control the interface without interference.
 
 If you'd like to see Masque support in a conflicting addon, try sending a feature request to that addon's author directly.
 
@@ -51,7 +48,7 @@ If you'd like to help localize this addon, please submit translations [here](htt
 
 ## Other Mods
 
-If you're looking to skin the built-in Inventory UI elements as well, check out [Masque Blizzard Inventory](https://github.com/kstange/MasqueBlizzInv) ([CurseForge](https://www.curseforge.com/wow/addons/masque-blizz-inventory "CurseForge"), [Wago](https://addons.wago.io/addons/masqueblizzinv), [WoWInterface](https://www.wowinterface.com/downloads/info26503-MasqueBlizzardInventory.html))!
+If you want to skin built-in Inventory UI elements as well, check out [Masque Blizzard Inventory](https://github.com/kstange/MasqueBlizzInv) ([CurseForge](https://www.curseforge.com/wow/addons/masque-blizz-inventory "CurseForge"), [Wago](https://addons.wago.io/addons/masqueblizzinv), [WoWInterface](https://www.wowinterface.com/downloads/info26503-MasqueBlizzardInventory.html))!
 
 ## Special Thanks
 
