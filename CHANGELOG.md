@@ -1,3 +1,7 @@
+# Version 12.0.0.1
+
+- Fixed an issue with the icon shape mask not being set correctly on Cooldown Manager bars
+
 # Version 12.0.0.0
 
 - Improved overall support for Cooldown Manager in Retail
