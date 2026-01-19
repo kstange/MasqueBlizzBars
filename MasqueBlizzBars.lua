@@ -130,8 +130,8 @@ function Addon:CooldownViewer_RefreshLayout()
 				hooksecurefunc(frame, "RefreshIconBorder",
 				               Addon.CooldownViewerItem_RefreshIconBorder)
 			end
-			if not frame.Mask then
-				frame.Mask = frame.Icon:GetMaskTexture(1)
+			if not frame.IconMask then
+				frame.IconMask = frame.Icon:GetMaskTexture(1)
 			end
 			if not frame.IconOverlay then
 				-- There should be one region left that isn't mapped
@@ -150,7 +150,6 @@ function Addon:CooldownViewer_RefreshLayout()
 			end
 
 			local groupDisabled = Groups[frameName].Group.db.Disabled
-			frame.Mask:SetShown(groupDisabled)
 			frame.IconOverlay:SetShown(groupDisabled)
 			if frame.DebuffBorder then
 				frame.DebuffBorder.Texture:SetShown(groupDisabled)
