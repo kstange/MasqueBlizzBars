@@ -145,31 +145,39 @@ function Core:Skin(buttons, group, bclass, slots, parent, prefix)
 		-- Otherwise, try to skin all the expected buttons at this level.
 		-- If bclass was passed, only act on the specific button class.
 		-- If children wasn't a number, we shouldn't be here, so skip this button.
-		elseif (bclass == button or not bclass) and type(children) == "number" then
+		elseif (bclass == button or not bclass) and type(children) ~= "table" then
 			-- Pass the correct type for this button so that Masque
 			-- doesn't have to try to figure it out.
-			--print("map: type: ", prefix .. button)
-			local btype = Types[prefix .. button] or {}
-			local dtype = Types['DEFAULT'] or {}
-			local type = btype.type or dtype.type or nil
-			local map = btype.map or nil
+			print("map: type: ", prefix .. button)
+			local button_type  = Types[prefix .. button] or {}
+			local default_type = Types['DEFAULT'] or {}
+			local final_type   = button_type.type or default_type.type or nil
+			local map = button_type.map or nil
 
-			-- If -1, assume button is the actual button name
+			-- If nil, assume button is the actual button name
 			-- If slots was set, we're confused, don't do anything
-			if children == -1 and not slots then
+			if children == nil and not slots then
 				--print("button:", button, children, parent[button])
 				local frame = parent[button]
 				local regions = Core:MakeRegions(frame, map)
-				group:AddButton(frame, regions, type)
+				group:AddButton(frame, regions, final_type)
 
-			-- If -2, assume button is a function
+			-- If a string, assume button is a reference to a function or table
 			-- If slots was set, we're confused, don't do anything
-			elseif children == -2 and not slots then
-				--print("button:", button, children, parent[button])
-				local frames = parent[button](parent)
+			elseif type(children) == 'string' and not slots then
+				local container = parent[button]
+				local contents = container[children]
+				--print("button:", button, children, type(contents), contents)
+				local frames = {}
+				if type(contents) == 'function' then
+					-- We're trusting this function return a table
+					frames = contents(container)
+				elseif type(contents) == 'table' then
+					frames = contents
+				end
 				for _, frame in ipairs(frames) do
 					local regions = Core:MakeRegions(frame, map)
-					group:AddButton(frame, regions, type)
+					group:AddButton(frame, regions, final_type)
 				end
 
 			-- Otherwise, append a range of numbers to the name.
@@ -214,12 +222,22 @@ function Core:SkinButtonPool(pools, group)
 				-- TODO These should always be ItemButtons by
 				-- nature of Blizzard code, but support regions
 				-- just in case.
-				if not button[AddonName.."Skinned"] then
+				if not button["_"..AddonName.."Skinned"] then
 					group:AddButton(button, nil, "Item")
-					button[AddonName.."Skinned"] = true
+					button["_"..AddonName.."Skinned"] = true
 				end
 			end
 		end
+	end
+end
+
+function Core:SkinByHook(...)
+	local frameName = self:GetName()
+	if frameName and Groups[frameName] and Groups[frameName].Buttons[frameName] then
+		if Groups[frameName]['PreHookFunction'] then
+			Groups[frameName]['PreHookFunction'](self, ...)
+		end
+		Core:Skin(Groups[frameName].Buttons, Groups[frameName].Group)
 	end
 end
 
@@ -255,6 +273,13 @@ function Core:Init()
 			cont.Group:SetName(L[cont.Title])
 			if cont.Init then
 				cont.Init(cont.Buttons)
+			end
+			if cont.HookFunction then
+				for buttonFrame, _ in pairs(cont.Buttons) do
+					if _G[buttonFrame] and _G[buttonFrame][cont.HookFunction] then
+						hooksecurefunc(_G[buttonFrame], cont.HookFunction, Core.SkinByHook)
+					end
+				end
 			end
 			if cont.Notes then
 				cont.Group.Notes = cont.Notes

@@ -30,11 +30,12 @@ Metadata.MasqueFriendlyName = "Blizzard Action Bars"
 --  High number is the first interface unsupported
 --  This can be repeated for multiple ranges
 -- Buttons should contain a list of frame names with an integer value
---  If -2, assume to be a function that returns a table of buttons
---  If -1, assume to be a singular button with that name
+--  If a string, assume to be a function or table of buttons
+--  If nil, assume to be a singular button with that name
 --  If  0, this is a dynamic frame to be skinned later
 --  If >0, attempt to loop through frames with the name prefix suffixed with
 --  the integer range
+-- HookFunction should contain a frame reference and function name to hook
 -- ButtonPools should reference parent frames containing an itemButtonPool
 -- State can be used for storing information about special buttons
 Metadata.Groups = {
@@ -167,10 +168,9 @@ Metadata.Groups = {
 		-- These are populated after the UI loads when the RefreshLayout
 		-- function is called
 		Delayed = true,
+		HookFunction = 'RefreshLayout',
 		Buttons = {
-			BuffIconCooldownViewer = {
-				GetItemFrames = -2
-			}
+			BuffIconCooldownViewer = 'GetItemFrames'
 		}
 	},
 	EssentialCooldownViewer = {
@@ -179,10 +179,9 @@ Metadata.Groups = {
 		-- These are populated after the UI loads when the RefreshLayout
 		-- function is called
 		Delayed = true,
+		HookFunction = 'RefreshLayout',
 		Buttons = {
-			EssentialCooldownViewer = {
-				GetItemFrames = -2
-			}
+			EssentialCooldownViewer = 'GetItemFrames'
 		}
 	},
 	UtilityCooldownViewer = {
@@ -191,12 +190,11 @@ Metadata.Groups = {
 		-- These are populated after the UI loads when the RefreshLayout
 		-- function is called
 		Delayed = true,
+		HookFunction = 'RefreshLayout',
 		Buttons = {
-			UtilityCooldownViewer = {
-				GetItemFrames = -2
-			}
+			UtilityCooldownViewer = 'GetItemFrames'
 		}
-	}
+	},
 }
 
 -- Specify Button Types and Regions for Buttons that need them
@@ -216,9 +214,9 @@ local BuffIconViewerMap = {
 Metadata.Types = {
 	-- This will be passed for all buttons unless it's otherwise overridden
 	DEFAULT = { type = "Action" },
-	BuffIconCooldownViewerGetItemFrames = { type = "Debuff", map = BuffIconViewerMap },
-	EssentialCooldownViewerGetItemFrames = { type = "Action", map = CooldownViewerMap },
-	UtilityCooldownViewerGetItemFrames = { type = "Action", map = CooldownViewerMap }
+	BuffIconCooldownViewer = { type = "Debuff", map = BuffIconViewerMap },
+	EssentialCooldownViewer = { type = "Action", map = CooldownViewerMap },
+	UtilityCooldownViewer = { type = "Action", map = CooldownViewerMap }
 }
 
 -- A table indicating the defaults for Options by key.

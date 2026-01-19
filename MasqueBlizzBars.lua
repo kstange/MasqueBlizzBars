@@ -113,7 +113,7 @@ function Addon:SpellFlyout_Toggle(_, flyoutID)
 	end
 end
 
-function Addon:CooldownViewer_RefreshLayout()
+function Addon:PreHook_CooldownViewer()
 	local frameName = self:GetName()
 	if frameName and Groups[frameName] and Groups[frameName].Buttons[frameName] then
 		-- Map the Mask to a key and hide the overlay
@@ -156,7 +156,6 @@ function Addon:CooldownViewer_RefreshLayout()
 			end
 		end
 
-		Core:Skin(Groups[frameName].Buttons[frameName], Groups[frameName].Group, nil, nil, self, frameName)
 	end
 end
 
@@ -235,15 +234,12 @@ function Addon:Init()
 		               Addon.SpellFlyout_Toggle)
 	end
 
-	-- Cooldown Manager
-	if Core:CheckVersion({ 110105, nil }) then
-		hooksecurefunc(BuffIconCooldownViewer, "RefreshLayout",
-		               Addon.CooldownViewer_RefreshLayout)
-		hooksecurefunc(EssentialCooldownViewer, "RefreshLayout",
-		               Addon.CooldownViewer_RefreshLayout)
-		hooksecurefunc(UtilityCooldownViewer, "RefreshLayout",
-		               Addon.CooldownViewer_RefreshLayout)
-	end
+	-- Cooldown Manager hook setup
+	Groups.BuffIconCooldownViewer.PreHookFunction  = Addon.PreHook_CooldownViewer
+	Groups.EssentialCooldownViewer.PreHookFunction = Addon.PreHook_CooldownViewer
+	Groups.UtilityCooldownViewer.PreHookFunction   = Addon.PreHook_CooldownViewer
+
+	-- ColorCurve needed for Dispel Types
 	if Core:CheckVersion({ 120000, nil }) then
 		Addon.DispelCurve = C_CurveUtil.CreateColorCurve()
 		Addon.DispelCurve:SetType(Enum.LuaCurveType.Step)
