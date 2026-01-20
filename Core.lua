@@ -29,7 +29,8 @@ Shared.Core = Core
 
 local _, _, _, ver = GetBuildInfo()
 
-local SkinnedKey = "_"..AddonName.."Skinned"
+Core.SkinnedKey = "_"..AddonName.."Skinned"
+Core.SkipKey    = "_"..AddonName.."Skip"
 
 -- Get an option for the AceConfigDialog
 function Core:GetOption(key)
@@ -161,10 +162,10 @@ function Core:Skin(buttons, group, bclass, slots, parent, prefix)
 			if children == nil and not slots then
 				--print("button:", button, children, parent[button])
 				local frame = parent[button]
-				if not frame[SkinnedKey] then
+				if not frame[Core.SkinnedKey] and not frame[Core.SkipKey] then
 					local regions = Core:MakeRegions(frame, map)
 					group:AddButton(frame, regions, final_type)
-					frame[SkinnedKey] = true
+					frame[Core.SkinnedKey] = true
 				end
 
 			-- If a string, assume button is a reference to a function or table
@@ -181,10 +182,10 @@ function Core:Skin(buttons, group, bclass, slots, parent, prefix)
 					frames = contents
 				end
 				for _, frame in ipairs(frames) do
-					if not frame[SkinnedKey] then
+					if not frame[Core.SkinnedKey] and not frame[Core.SkipKey] then
 						local regions = Core:MakeRegions(frame, map)
 						group:AddButton(frame, regions, final_type)
-						frame[SkinnedKey] = true
+						frame[Core.SkinnedKey] = true
 					end
 				end
 
@@ -210,10 +211,10 @@ function Core:Skin(buttons, group, bclass, slots, parent, prefix)
 				for i = min, max do
 					--print("button:", button, i, parent[button..i])
 					local frame = parent[button..i]
-					if not frame[SkinnedKey] then
+					if not frame[Core.SkinnedKey] and not frame[Core.SkipKey] then
 						local regions = Core:MakeRegions(frame, map)
 						group:AddButton(frame, regions, final_type)
-						frame[SkinnedKey] = true
+						frame[Core.SkinnedKey] = true
 					end
 				end
 				if slots then
@@ -233,9 +234,9 @@ function Core:SkinButtonPool(pools, group)
 				-- TODO These should always be ItemButtons by
 				-- nature of Blizzard code, but support regions
 				-- just in case.
-				if not button[SkinnedKey] then
+				if not button[Core.SkinnedKey] and not button[Core.SkipKey] then
 					group:AddButton(button, nil, "Item")
-					button[SkinnedKey] = true
+					button[Core.SkinnedKey] = true
 				end
 			end
 		end

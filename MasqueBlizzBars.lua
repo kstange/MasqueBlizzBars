@@ -113,6 +113,28 @@ function Addon:SpellFlyout_Toggle(_, flyoutID)
 	end
 end
 
+function Addon:PreHook_BuffFrame()
+	local frameName = self:GetName()
+	if frameName and Groups[frameName] and Groups[frameName].Buttons[frameName] then
+		for _, frame in ipairs(self.auraFrames) do
+			if self == frame:GetParent() then
+				frame[Core.SkipKey] = true
+			end
+			if frame.DebuffBorder and not frame.DebuffBorderMBB then
+				frame.DebuffBorderMBB = frame:CreateTexture(nil, "ARTWORK", nil, 0)
+				frame.DebuffBorderMBB:SetVertexColor(0, 0, 0, 0)
+				hooksecurefunc(frame, "UpdateAuraType", Addon.AuraButton_UpdateAuraType)
+				frame:SetSize(30, 30)
+				hooksecurefunc(frame, "SetSize", Addon.AuraButton_SetSize)
+			end
+			local groupDisabled = Groups[frameName].Group.db.Disabled
+			if frame.DebuffBorder then
+				frame.DebuffBorder:SetShown(groupDisabled)
+			end
+		end
+	end
+end
+
 function Addon:PreHook_CooldownViewer()
 	local frameName = self:GetName()
 	if frameName and Groups[frameName] and Groups[frameName].Buttons[frameName] then
@@ -167,6 +189,41 @@ function Addon:CooldownViewerItem_RefreshIconBorder()
 		frame.DebuffBorder.Texture:SetShown(groupDisabled)
 		if frame.auraInstanceID and frame.auraDataUnit == "target" and not groupDisabled then
 			local color = C_UnitAuras.GetAuraDispelTypeColor(frame.auraDataUnit, frame.auraInstanceID, Addon.DispelCurve)
+			frame.DebuffBorderMBB:SetVertexColor(color.r, color.g, color.b, color.a)
+		else
+			frame.DebuffBorderMBB:SetVertexColor(0, 0, 0, 0)
+		end
+	end
+end
+
+function Addon:AuraButton_SetSize(width, height)
+	local frame = self
+	local frameName = frame:GetParent():GetParent():GetName()
+	local groupDisabled = Groups[frameName].Group.db.Disabled
+	if not groupDisabled then
+		local normal = self._MSQ_CFG.Normal_Custom
+		if normal then
+			normal:ClearAllPoints()
+			normal:SetPoint('CENTER', self.Icon, 'CENTER')
+		end
+		if self.DebuffBorderMBB then
+			self.DebuffBorderMBB:ClearAllPoints()
+			self.DebuffBorderMBB:SetPoint('CENTER', self.Icon, 'CENTER')
+		end
+	end
+end
+
+function Addon:AuraButton_UpdateAuraType(auraType)
+	local frame = self
+        if frame and frame.DebuffBorderMBB then
+		local frameName = frame:GetParent():GetParent():GetName()
+		local groupDisabled = Groups[frameName].Group.db.Disabled
+		frame.DebuffBorder:SetShown(groupDisabled)
+		if frame.buttonInfo and (auraType == "Debuff" or auraType == "DeadlyDebuff") and not groupDisabled then
+			local auraData = C_UnitAuras.GetDebuffDataByIndex(frame.unit, frame.buttonInfo.index)
+			print(frame.buttonInfo.index, auraData.auraInstanceID, frame.unit)
+			local color = C_UnitAuras.GetAuraDispelTypeColor(frame.unit, auraData.auraInstanceID, Addon.DispelCurve)
+			print("color", color.r, color.g, color.b, color.a)
 			frame.DebuffBorderMBB:SetVertexColor(color.r, color.g, color.b, color.a)
 		else
 			frame.DebuffBorderMBB:SetVertexColor(0, 0, 0, 0)
@@ -233,6 +290,11 @@ function Addon:Init()
 		hooksecurefunc(SpellFlyout, "Toggle",
 		               Addon.SpellFlyout_Toggle)
 	end
+
+	-- Buff Frame hook setup
+	Groups.BuffFrame.PreHookFunction               = Addon.PreHook_BuffFrame
+	Groups.DebuffFrame.PreHookFunction             = Addon.PreHook_BuffFrame
+	Groups.ExternalDefensivesFrame.PreHookFunction = Addon.PreHook_BuffFrame
 
 	-- Cooldown Manager hook setup
 	Groups.BuffIconCooldownViewer.PreHookFunction  = Addon.PreHook_CooldownViewer

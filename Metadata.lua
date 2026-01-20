@@ -195,6 +195,39 @@ Metadata.Groups = {
 			UtilityCooldownViewer = 'GetItemFrames'
 		}
 	},
+	BuffFrame = {
+		Title = "Buff Frame",
+		Versions = { 110000, nil }, -- I know this came before, just not ready for classic yet
+		-- These are populated after the UI loads when the UpdateAuras
+		-- function is called
+		Delayed = true,
+		HookFunction = 'UpdateAuras',
+		Buttons = {
+			BuffFrame = 'auraFrames'
+		}
+	},
+	DebuffFrame = {
+		Title = "Debuff Frame",
+		Versions = { 110000, nil }, -- I know this came before, just not ready for classic yet
+		-- These are populated after the UI loads when the UpdateAuras
+		-- function is called
+		Delayed = true,
+		HookFunction = 'UpdateAuras',
+		Buttons = {
+			DebuffFrame = 'auraFrames'
+		}
+	},
+	ExternalDefensivesFrame = {
+		Title = "External Defensives Frame",
+		Versions = { 120000, nil },
+		-- These are populated after the UI loads when the UpdateAuras
+		-- function is called
+		Delayed = true,
+		HookFunction = 'UpdateAuras',
+		Buttons = {
+			ExternalDefensivesFrame = 'auraFrames'
+		}
+	}
 }
 
 -- Specify Button Types and Regions for Buttons that need them
@@ -211,9 +244,16 @@ local BuffIconViewerMap = {
 	DebuffBorder = "DebuffBorderMBB"
 }
 
+local DebuffFrameMap = {
+	DebuffBorder = "DebuffBorderMBB"
+}
+
 Metadata.Types = {
 	-- This will be passed for all buttons unless it's otherwise overridden
 	DEFAULT = { type = "Action" },
+	BuffFrame = { type = "Debuff" },
+	ExternalDefensivesFrame = { type = "Debuff" },
+	DebuffFrame = { type = "Debuff", map = DebuffFrameMap },
 	BuffIconCooldownViewer = { type = "Debuff", map = BuffIconViewerMap },
 	EssentialCooldownViewer = { type = "Action", map = CooldownViewerMap },
 	UtilityCooldownViewer = { type = "Action", map = CooldownViewerMap }
