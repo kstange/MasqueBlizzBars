@@ -29,6 +29,8 @@ Shared.Core = Core
 
 local _, _, _, ver = GetBuildInfo()
 
+local SkinnedKey = "_"..AddonName.."Skinned"
+
 -- Get an option for the AceConfigDialog
 function Core:GetOption(key)
 	if not key then
@@ -148,7 +150,7 @@ function Core:Skin(buttons, group, bclass, slots, parent, prefix)
 		elseif (bclass == button or not bclass) and type(children) ~= "table" then
 			-- Pass the correct type for this button so that Masque
 			-- doesn't have to try to figure it out.
-			print("map: type: ", prefix .. button)
+			--print("map: type: ", prefix .. button)
 			local button_type  = Types[prefix .. button] or {}
 			local default_type = Types['DEFAULT'] or {}
 			local final_type   = button_type.type or default_type.type or nil
@@ -159,8 +161,11 @@ function Core:Skin(buttons, group, bclass, slots, parent, prefix)
 			if children == nil and not slots then
 				--print("button:", button, children, parent[button])
 				local frame = parent[button]
-				local regions = Core:MakeRegions(frame, map)
-				group:AddButton(frame, regions, final_type)
+				if not frame[SkinnedKey] then
+					local regions = Core:MakeRegions(frame, map)
+					group:AddButton(frame, regions, final_type)
+					frame[SkinnedKey] = true
+				end
 
 			-- If a string, assume button is a reference to a function or table
 			-- If slots was set, we're confused, don't do anything
@@ -176,8 +181,11 @@ function Core:Skin(buttons, group, bclass, slots, parent, prefix)
 					frames = contents
 				end
 				for _, frame in ipairs(frames) do
-					local regions = Core:MakeRegions(frame, map)
-					group:AddButton(frame, regions, final_type)
+					if not frame[SkinnedKey] then
+						local regions = Core:MakeRegions(frame, map)
+						group:AddButton(frame, regions, final_type)
+						frame[SkinnedKey] = true
+					end
 				end
 
 			-- Otherwise, append a range of numbers to the name.
@@ -202,8 +210,11 @@ function Core:Skin(buttons, group, bclass, slots, parent, prefix)
 				for i = min, max do
 					--print("button:", button, i, parent[button..i])
 					local frame = parent[button..i]
-					local regions = Core:MakeRegions(frame, map)
-					group:AddButton(frame, regions, type)
+					if not frame[SkinnedKey] then
+						local regions = Core:MakeRegions(frame, map)
+						group:AddButton(frame, regions, final_type)
+						frame[SkinnedKey] = true
+					end
 				end
 				if slots then
 					buttons[button] = slots
@@ -222,15 +233,19 @@ function Core:SkinButtonPool(pools, group)
 				-- TODO These should always be ItemButtons by
 				-- nature of Blizzard code, but support regions
 				-- just in case.
-				if not button["_"..AddonName.."Skinned"] then
+				if not button[SkinnedKey] then
 					group:AddButton(button, nil, "Item")
-					button["_"..AddonName.."Skinned"] = true
+					button[SkinnedKey] = true
 				end
 			end
 		end
 	end
 end
 
+-- This function will perform a generic hook and attempt to skin the buttons in
+-- the frame whenever that hook is called. This is useful for frames that are
+-- frequently changing. The addon can provide a PreHookFunction to be called to
+-- do any needed setup.
 function Core:SkinByHook(...)
 	local frameName = self:GetName()
 	if frameName and Groups[frameName] and Groups[frameName].Buttons[frameName] then
