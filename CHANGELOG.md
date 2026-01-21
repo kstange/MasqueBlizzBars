@@ -1,7 +1,7 @@
 # Version 12.0.0.1
 
 - Fixed an issue with the icon shape mask not being set correctly on Cooldown Manager bars
-- Fixed an error that sometimes occurred when updating debuff borders on Cooldown Manager bars
+- Fixed an error that sometimes occurred when updating debuff type colors on Cooldown Manager bars
 - Refactored some steps for skinning new buttons to be more efficient
 
 # Version 12.0.0.0
