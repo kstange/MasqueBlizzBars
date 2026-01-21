@@ -161,15 +161,17 @@ end
 
 function Addon:CooldownViewerItem_RefreshIconBorder()
 	local frame = self
-        if frame and frame.DebuffBorderMBB then
+	if frame and frame.DebuffBorderMBB then
 		local frameName = frame:GetParent():GetName()
-		local groupDisabled = Groups[frameName].Group.db.Disabled
-		frame.DebuffBorder.Texture:SetShown(groupDisabled)
-		if frame.auraInstanceID and frame.auraDataUnit == "target" and not groupDisabled then
-			local color = C_UnitAuras.GetAuraDispelTypeColor(frame.auraDataUnit, frame.auraInstanceID, Addon.DispelCurve)
-			frame.DebuffBorderMBB:SetVertexColor(color.r, color.g, color.b, color.a)
-		else
-			frame.DebuffBorderMBB:SetVertexColor(0, 0, 0, 0)
+		if frameName and Groups[frameName] then
+			local groupDisabled = Groups[frameName].Group.db.Disabled
+			frame.DebuffBorder.Texture:SetShown(groupDisabled)
+			if frame.auraInstanceID and frame.auraDataUnit == "target" and not groupDisabled then
+				local color = C_UnitAuras.GetAuraDispelTypeColor(frame.auraDataUnit, frame.auraInstanceID, Addon.DispelCurve)
+				frame.DebuffBorderMBB:SetVertexColor(color.r, color.g, color.b, color.a)
+			else
+				frame.DebuffBorderMBB:SetVertexColor(0, 0, 0, 0)
+			end
 		end
 	end
 end
