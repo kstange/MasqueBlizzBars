@@ -2,13 +2,14 @@
 
 - Fixed an issue with the icon shape mask not being set correctly on Cooldown Manager bars
 - Fixed an error that sometimes occurred when updating debuff borders on Cooldown Manager bars
+- Refactored the setup process for Cooldown Manager bars
 
 # Version 12.0.0.0
 
 - Improved overall support for Cooldown Manager in Retail
   - Added support for coloring debuff types on Tracked Buffs in Retail 12.0.0 (fixes #6)
   - Split the Cooldown Manager group into Tracked Buffs, Essential Cooldowns, and Utility Cooldowns (fixes #7)
-- Updated TOC for Retail 12.0.1 (beta)
+- Updated TOC for Retail 12.0.1 (Beta)
 
 # Feature Notes
 
