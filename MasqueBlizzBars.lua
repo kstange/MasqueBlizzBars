@@ -180,9 +180,11 @@ function Addon:CooldownViewerItem_ShowPandemicStateFrame()
 	local frame = self
 	if frame and frame.DebuffBorderMBB and frame.PandemicIcon then
 		local frameName = frame:GetParent():GetName()
-		local groupDisabled = Groups[frameName].Group.db.Disabled
-		if not groupDisabled then
-			-- TODO: Handle Pandemic Overlay?
+		if frameName and Groups[frameName] then
+			local groupDisabled = Groups[frameName].Group.db.Disabled
+			if not groupDisabled then
+				-- TODO: Handle Pandemic Overlay?
+			end
 		end
 	end
 end

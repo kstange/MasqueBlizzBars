@@ -1,3 +1,7 @@
+# Version 12.0.0.2
+
+- Fixed an error that sometimes occurred with buffs in the pandemic range on the Tracked Buffs bar
+
 # Version 12.0.0.1
 
 - Fixed an issue with the icon shape mask not being set correctly on Cooldown Manager bars
