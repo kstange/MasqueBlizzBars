@@ -1,11 +1,11 @@
 # Version 12.0.0.2
 
-- Fixed an error that sometimes occurred with buffs in the pandemic range on the Tracked Buffs bar
+- Fixed an error that sometimes occurred with buffs in the pandemic range on the Tracked Buffs bar (fixes #10)
 
 # Version 12.0.0.1
 
 - Fixed an issue with the icon shape mask not being set correctly on Cooldown Manager bars
-- Fixed an error that sometimes occurred when updating debuff type colors on Cooldown Manager bars
+- Fixed an error that sometimes occurred when updating debuff type colors on Cooldown Manager bars (fixes #9)
 - Refactored some steps for skinning new buttons to be more efficient
 
 # Version 12.0.0.0
