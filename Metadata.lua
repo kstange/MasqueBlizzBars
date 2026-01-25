@@ -173,6 +173,15 @@ Metadata.Groups = {
 			BuffIconCooldownViewer = 'GetItemFrames'
 		}
 	},
+	BuffBarCooldownViewer = {
+		Title = "Tracked Bars",
+		Versions = { 110105, nil },
+		Delayed = true,
+		HookFunction = 'RefreshLayout',
+		Buttons = {
+			BuffBarCooldownViewer = 'GetBuffBarIcons'
+		}
+	},
 	EssentialCooldownViewer = {
 		Title = "Essential Cooldowns",
 		Versions = { 110105, nil },
@@ -215,6 +224,7 @@ Metadata.Types = {
 	-- This will be passed for all buttons unless it's otherwise overridden
 	DEFAULT = { type = "Action" },
 	BuffIconCooldownViewer = { type = "Debuff", map = BuffIconViewerMap },
+	BuffBarCooldownViewer = { type = "Debuff", map = BuffIconViewerMap },
 	EssentialCooldownViewer = { type = "Action", map = CooldownViewerMap },
 	UtilityCooldownViewer = { type = "Action", map = CooldownViewerMap }
 }
