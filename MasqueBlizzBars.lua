@@ -113,35 +113,78 @@ function Addon:SpellFlyout_Toggle(_, flyoutID)
 	end
 end
 
+-- Helper to extract just the icon containers from the bars
+function Addon:GetBuffBarIcons()
+	local frames = {}
+	if self.GetItemFrames then
+		local bars = self:GetItemFrames()
+		for _, bar in ipairs(bars) do
+			if bar.Icon then
+				table.insert(frames, bar.Icon)
+			end
+		end
+	end
+	return frames
+end
+
 function Addon:PreHook_CooldownViewer()
 	local frameName = self:GetName()
 	if frameName and Groups[frameName] and Groups[frameName].Buttons[frameName] then
-		-- Map the Mask to a key and hide the overlay
+		
 		for frame in self.itemFramePool:EnumerateActive() do
-			if frame.ChargeCount and frame.ChargeCount.Current and not frame.Count then
-				frame.Count = frame.ChargeCount.Current
+			-- Determine what we are actually skinning (The Bar or the Icon Container?)
+			local skinTarget = frame
+			if frame.Icon and not frame.Icon.GetMaskTexture and frame.Icon.Icon then
+				-- This is a BuffBar: Skin the child container, not the bar
+				skinTarget = frame.Icon
 			end
-			if frame.Applications and frame.Applications.Applications and not frame.Count then
-				frame.Count = frame.Applications.Applications
+
+			-- 1. Fix Count/Applications mapping
+			if not skinTarget.Count then
+				if skinTarget.ChargeCount and skinTarget.ChargeCount.Current then
+					skinTarget.Count = skinTarget.ChargeCount.Current
+				elseif skinTarget.Applications then
+					-- Sometimes Applications is the fontstring itself, sometimes it's a frame containing it
+					if skinTarget.Applications.Applications then
+						skinTarget.Count = skinTarget.Applications.Applications
+					else
+						skinTarget.Count = skinTarget.Applications
+					end
+				elseif frame.Applications and frame.Applications.Applications then
+					-- Fallback to parent frame if not found on target
+					skinTarget.Count = frame.Applications.Applications
+				end
 			end
-			if frame.DebuffBorder and not frame.DebuffBorderMBB then
-				frame.DebuffBorderMBB = frame:CreateTexture(nil, "ARTWORK", nil, 0)
-				frame.DebuffBorderMBB:SetVertexColor(0, 0, 0, 0)
-				hooksecurefunc(frame, "RefreshIconBorder",
-				               Addon.CooldownViewerItem_RefreshIconBorder)
+
+			-- 2. Create/Attach DebuffBorderMBB to the SKIN TARGET
+			if frame.DebuffBorder and not skinTarget.DebuffBorderMBB then
+				skinTarget.DebuffBorderMBB = skinTarget:CreateTexture(nil, "ARTWORK", nil, 0)
+				skinTarget.DebuffBorderMBB:SetVertexColor(0, 0, 0, 0)
+				skinTarget.DebuffBorderMBB:SetAllPoints(skinTarget)
+				
+				-- We hook the PARENT (frame) because that is where the Blizzard events fire
+				hooksecurefunc(frame, "RefreshIconBorder", Addon.CooldownViewerItem_RefreshIconBorder)
 			end
-			if not frame.IconMask then
-				frame.IconMask = frame.Icon:GetMaskTexture(1)
+
+			-- 3. Fix Masks
+			if not skinTarget.IconMask then
+				-- If target is the container, .Icon is the texture
+				if skinTarget.Icon and skinTarget.Icon.GetMaskTexture then
+					skinTarget.IconMask = skinTarget.Icon:GetMaskTexture(1)
+				end
 			end
-			if not frame.IconOverlay then
-				-- There should be one region left that isn't mapped
-				for i = 1, select("#", frame:GetRegions()) do
-					local texture = select(i, frame:GetRegions())
+
+			-- 4. Fix Overlay
+			if not skinTarget.IconOverlay then
+				-- Scan regions on the SKIN TARGET
+				for i = 1, select("#", skinTarget:GetRegions()) do
+					local texture = select(i, skinTarget:GetRegions())
 					if texture.GetAtlas and texture:GetAtlas() == "UI-HUD-CoolDownManager-IconOverlay" then
-						frame.IconOverlay = texture
+						skinTarget.IconOverlay = texture
 					end
 				end
 			end
+
 			if Core:CheckVersion({ 120000, nil }) then
 				hooksecurefunc(frame, "ShowPandemicStateFrame",
 				               Addon.CooldownViewerItem_ShowPandemicStateFrame)
@@ -150,27 +193,35 @@ function Addon:PreHook_CooldownViewer()
 			end
 
 			local groupDisabled = Groups[frameName].Group.db.Disabled
-			frame.IconOverlay:SetShown(groupDisabled)
+			if skinTarget.IconOverlay then
+				skinTarget.IconOverlay:SetShown(groupDisabled)
+			end
 			if frame.DebuffBorder then
 				frame.DebuffBorder.Texture:SetShown(groupDisabled)
 			end
 		end
-
 	end
 end
 
 function Addon:CooldownViewerItem_RefreshIconBorder()
 	local frame = self
-	if frame and frame.DebuffBorderMBB then
+	
+	-- Resolve the skin target again
+	local skinTarget = frame
+	if frame.Icon and not frame.Icon.GetMaskTexture and frame.Icon.Icon then
+		skinTarget = frame.Icon
+	end
+
+	if skinTarget and skinTarget.DebuffBorderMBB then
 		local frameName = frame:GetParent():GetName()
 		if frameName and Groups[frameName] then
 			local groupDisabled = Groups[frameName].Group.db.Disabled
 			frame.DebuffBorder.Texture:SetShown(groupDisabled)
 			if frame.auraInstanceID and frame.auraDataUnit == "target" and not groupDisabled then
 				local color = C_UnitAuras.GetAuraDispelTypeColor(frame.auraDataUnit, frame.auraInstanceID, Addon.DispelCurve)
-				frame.DebuffBorderMBB:SetVertexColor(color.r, color.g, color.b, color.a)
+				skinTarget.DebuffBorderMBB:SetVertexColor(color.r, color.g, color.b, color.a)
 			else
-				frame.DebuffBorderMBB:SetVertexColor(0, 0, 0, 0)
+				skinTarget.DebuffBorderMBB:SetVertexColor(0, 0, 0, 0)
 			end
 		end
 	end
@@ -240,6 +291,7 @@ function Addon:Init()
 
 	-- Cooldown Manager hook setup
 	Groups.BuffIconCooldownViewer.PreHookFunction  = Addon.PreHook_CooldownViewer
+	Groups.BuffBarCooldownViewer.PreHookFunction   = Addon.PreHook_CooldownViewer
 	Groups.EssentialCooldownViewer.PreHookFunction = Addon.PreHook_CooldownViewer
 	Groups.UtilityCooldownViewer.PreHookFunction   = Addon.PreHook_CooldownViewer
 
@@ -289,6 +341,12 @@ function Addon:Init()
 		-- Empty the whole options table because we don't support it on Classic
 		Metadata.Options = nil
 	end
+
+	-- Attach the custom getter to the frame so Core.lua can find it via string lookup
+	if BuffBarCooldownViewer then
+		BuffBarCooldownViewer.GetBuffBarIcons = Addon.GetBuffBarIcons
+	end
+
 end
 
 Addon:Init()
