@@ -2,7 +2,8 @@
 
 - Fixed an error that sometimes occurred on bars with a variable number of buttons (fixes #18)
 - Fixed the Out of Range indicator extending outside of Cooldown Manager buttons on some skins (fixes #17)
-- Added an error handler for unknown dispel colors; please report these if you see the chat message
+- Added an error handler for unknown dispel colors; please report them if you see the chat message (fixes multiple Curseforge reports)
+- Added support for the Tracked Bars bar (fixes #12)
 
 # Version 12.0.0.2
 

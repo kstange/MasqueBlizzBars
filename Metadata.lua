@@ -162,6 +162,17 @@ Metadata.Groups = {
 			-- battle
 		}
 	},
+	BuffBarCooldownViewer = {
+		Title = "Tracked Bars",
+		Versions = { 110105, nil },
+		-- These are populated after the UI loads when the RefreshLayout
+		-- function is called
+		Delayed = true,
+		HookFunction = 'RefreshLayout',
+		Buttons = {
+			BuffBarCooldownViewer = 'GetItemIconFrames'
+		}
+	},
 	BuffIconCooldownViewer = {
 		Title = "Tracked Buffs",
 		Versions = { 110105, nil },
@@ -211,9 +222,17 @@ local BuffIconViewerMap = {
 	DebuffBorder = "DebuffBorderMBB"
 }
 
+-- The BuffBarCooldownViewer Cooldown is on the bar, not the icon
+local BuffBarViewerMap = {
+	Icon = "Icon",
+	Count = "Count",
+	DebuffBorder = "DebuffBorderMBB"
+}
+
 Metadata.Types = {
 	-- This will be passed for all buttons unless it's otherwise overridden
 	DEFAULT = { type = "Action" },
+	BuffBarCooldownViewer = { type = "Debuff", map = BuffBarViewerMap },
 	BuffIconCooldownViewer = { type = "Debuff", map = BuffIconViewerMap },
 	EssentialCooldownViewer = { type = "Action", map = CooldownViewerMap },
 	UtilityCooldownViewer = { type = "Action", map = CooldownViewerMap }

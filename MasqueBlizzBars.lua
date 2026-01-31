@@ -113,40 +113,77 @@ function Addon:SpellFlyout_Toggle(_, flyoutID)
 	end
 end
 
+-- This helper gets attached to BuffBarCooldownViewer to return a table of icon frames
+-- This is needed because we can't give Masque the top level frame or it will stretch
+-- the icon across the whole thing.
+function Addon:Helper_BuffBar_GetItemIconFrames()
+	if not self.itemFramePool then return end
+	local icons = {}
+	for frame in self.itemFramePool:EnumerateActive() do
+		table.insert(icons, frame.Icon)
+	end
+	return icons
+end
+
+
 function Addon:PreHook_CooldownViewer()
 	local frameName = self:GetName()
 	if frameName and Groups[frameName] and Groups[frameName].Buttons[frameName] then
-		-- Map the Mask to a key and hide the overlay
 		for frame in self.itemFramePool:EnumerateActive() do
+			-- Assume the iconParent is the same as the frame to start
+			-- We're going to put all elements that Masque needs to see in iconParent directly
+			local iconParent = frame
+
+			-- Buff Bars - Icon is nested on Icon, so map iconParent to frame.Icon,
+			--             then Map Count to Applications
+			if frame.Icon.Icon then
+				iconParent = frame.Icon
+				iconParent.Count = iconParent.Applications
+			end
+
+			-- Cooldowns - Map Count to ChargeCount.Current
 			if frame.ChargeCount and frame.ChargeCount.Current and not frame.Count then
 				frame.Count = frame.ChargeCount.Current
 			end
+
+			-- Buff Icons - Map Count to Applications.Applications
 			if frame.Applications and frame.Applications.Applications and not frame.Count then
 				frame.Count = frame.Applications.Applications
 			end
-			if frame.DebuffBorder and not frame.DebuffBorderMBB then
-				frame.DebuffBorderMBB = frame:CreateTexture(nil, "ARTWORK", nil, 0)
-				frame.DebuffBorderMBB:SetVertexColor(0, 0, 0, 0)
+
+			-- Buffs - Create new DebuffBorderMBB frame and handle updates to
+			--         the icon border; this region must be passed to Masque
+			if frame.DebuffBorder and not iconParent.DebuffBorderMBB then
+				iconParent.DebuffBorderMBB = iconParent:CreateTexture(nil, "ARTWORK", nil, 0)
+				iconParent.DebuffBorderMBB:SetVertexColor(0, 0, 0, 0)
 				hooksecurefunc(frame, "RefreshIconBorder",
 				               Addon.CooldownViewerItem_RefreshIconBorder)
 			end
+
+			-- Cooldowns - Handle masking the Out of Range frame
 			if frame.OutOfRange then
 				frame.OutOfRange:SetDrawLayer('ARTWORK', -1)
 				hooksecurefunc(frame, "RefreshIconColor",
 				               Addon.CooldownViewerItem_RefreshIconColor)
 			end
-			if not frame.IconMask then
-				frame.IconMask = frame.Icon:GetMaskTexture(1)
+
+			-- All - Map IconMask to the Icon's mask texture which helps Masque find it
+			if not iconParent.IconMask then
+				iconParent.IconMask = iconParent.Icon:GetMaskTexture(1)
 			end
-			if not frame.IconOverlay then
+
+			-- All - Map the IconOverlay to a key for easy access to hide or show it later
+			if not iconParent.IconOverlay then
 				-- There should be one region left that isn't mapped
-				for i = 1, select("#", frame:GetRegions()) do
-					local texture = select(i, frame:GetRegions())
+				for i = 1, select("#", iconParent:GetRegions()) do
+					local texture = select(i, iconParent:GetRegions())
 					if texture.GetAtlas and texture:GetAtlas() == "UI-HUD-CoolDownManager-IconOverlay" then
-						frame.IconOverlay = texture
+						iconParent.IconOverlay = texture
 					end
 				end
 			end
+
+			-- Hooks for the Pandemic State, we can hopefully handle this in the future
 			if Core:CheckVersion({ 120000, nil }) then
 				hooksecurefunc(frame, "ShowPandemicStateFrame",
 				               Addon.CooldownViewerItem_ShowPandemicStateFrame)
@@ -154,8 +191,11 @@ function Addon:PreHook_CooldownViewer()
 				               Addon.CooldownViewerItem_HidePandemicStateFrame)
 			end
 
+			-- Show the IconOverlay only if this group isn't enabled
 			local groupDisabled = Groups[frameName].Group.db.Disabled
-			frame.IconOverlay:SetShown(groupDisabled)
+			iconParent.IconOverlay:SetShown(groupDisabled)
+
+			-- Show the stock DebuffBorder only if this group isn't enabled
 			if frame.DebuffBorder then
 				frame.DebuffBorder.Texture:SetShown(groupDisabled)
 			end
@@ -192,7 +232,11 @@ end
 -- Handle dispel type changes using a colorCurve
 function Addon:CooldownViewerItem_RefreshIconBorder()
 	local frame = self
-	if frame and frame.DebuffBorderMBB then
+	local debuffBorder = nil
+	if frame then
+		debuffBorder = frame.DebuffBorderMBB or frame.Icon.DebuffBorderMBB
+	end
+	if debuffBorder then
 		local frameName = frame:GetParent():GetName()
 		if frameName and Groups[frameName] then
 			local groupDisabled = Groups[frameName].Group.db.Disabled
@@ -200,7 +244,7 @@ function Addon:CooldownViewerItem_RefreshIconBorder()
 			if frame.auraInstanceID and frame.auraDataUnit == "target" and not groupDisabled then
 				local color = C_UnitAuras.GetAuraDispelTypeColor(frame.auraDataUnit, frame.auraInstanceID, Addon.DispelCurve)
 				if color then
-					frame.DebuffBorderMBB:SetVertexColor(color.r, color.g, color.b, color.a)
+					debuffBorder:SetVertexColor(color.r, color.g, color.b, color.a)
 				else
 					if not frame._MBBDispelAlerted then
 						local secretAuraData = C_UnitAuras.GetAuraDataByAuraInstanceID(frame.auraDataUnit, frame.auraInstanceID)
@@ -210,10 +254,10 @@ function Addon:CooldownViewerItem_RefreshIconBorder()
 						      secretAuraData.dispelName)
 						frame._MBBDispelAlerted = true
 					end
-					frame.DebuffBorderMBB:SetVertexColor(0, 0, 0, 0)
+					debuffBorder:SetVertexColor(0, 0, 0, 0)
 				end
 			else
-				frame.DebuffBorderMBB:SetVertexColor(0, 0, 0, 0)
+				debuffBorder:SetVertexColor(0, 0, 0, 0)
 			end
 		end
 	end
@@ -282,9 +326,13 @@ function Addon:Init()
 	end
 
 	-- Cooldown Manager hook setup
-	Groups.BuffIconCooldownViewer.PreHookFunction  = Addon.PreHook_CooldownViewer
-	Groups.EssentialCooldownViewer.PreHookFunction = Addon.PreHook_CooldownViewer
-	Groups.UtilityCooldownViewer.PreHookFunction   = Addon.PreHook_CooldownViewer
+	if Core:CheckVersion({ 110105, nil }) then
+		Groups.BuffBarCooldownViewer.PreHookFunction   = Addon.PreHook_CooldownViewer
+		Groups.BuffIconCooldownViewer.PreHookFunction  = Addon.PreHook_CooldownViewer
+		Groups.EssentialCooldownViewer.PreHookFunction = Addon.PreHook_CooldownViewer
+		Groups.UtilityCooldownViewer.PreHookFunction   = Addon.PreHook_CooldownViewer
+		BuffBarCooldownViewer.GetItemIconFrames = Addon.Helper_BuffBar_GetItemIconFrames
+	end
 
 	if Core:CheckVersion({ 120000, nil }) then
 		-- ColorCurve needed for Dispel Types
