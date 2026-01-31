@@ -22,6 +22,7 @@ Masque Blizzard Bars can currently skin the following bars, according to your ga
 - Cooldown Manager (with each bar type configured indepdendently)
   - Essential Cooldowns
   - Utility Cooldowns
+  - Tracked Bars
   - Tracked Buffs
 
 Support for Buffs, Debuffs and External Defensives is planned in a future update.
