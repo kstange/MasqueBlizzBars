@@ -31,7 +31,7 @@ Metadata.MasqueFriendlyName = "Blizzard Action Bars"
 --  This can be repeated for multiple ranges
 -- Buttons should contain a list of frame names with an integer value
 --  If a string, assume to be a function or table of buttons
---  If nil, assume to be a singular button with that name
+--  If -1, assume to be a singular button with that name
 --  If  0, this is a dynamic frame to be skinned later
 --  If >0, attempt to loop through frames with the name prefix suffixed with
 --  the integer range

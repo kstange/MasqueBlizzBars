@@ -156,12 +156,12 @@ function Core:Skin(buttons, group, bclass, slots, parent, prefix)
 			local final_type   = button_type.type or default_type.type or nil
 			local map = button_type.map or nil
 
-			-- If nil, assume button is the actual button name
+			-- If -1, assume button is the actual button name
 			-- If slots was set, we're confused, don't do anything
-			if children == nil and not slots then
+			if children == -1 and not slots then
 				--print("button:", button, children, parent[button])
 				local frame = parent[button]
-				if not frame[SkinnedKey] then
+				if frame and not frame[SkinnedKey] then
 					local regions = Core:MakeRegions(frame, map)
 					group:AddButton(frame, regions, final_type)
 					frame[SkinnedKey] = true
@@ -210,7 +210,7 @@ function Core:Skin(buttons, group, bclass, slots, parent, prefix)
 				for i = min, max do
 					--print("button:", button, i, parent[button..i])
 					local frame = parent[button..i]
-					if not frame[SkinnedKey] then
+					if frame and not frame[SkinnedKey] then
 						local regions = Core:MakeRegions(frame, map)
 						group:AddButton(frame, regions, final_type)
 						frame[SkinnedKey] = true
