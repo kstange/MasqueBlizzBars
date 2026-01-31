@@ -124,7 +124,9 @@ function Addon:Helper_BuffBar_GetItemIconFrames()
 	return icons
 end
 
-
+-- This is called as a PreHookFunction from the HookFunction to set up the frame so Masque understands it.
+-- We also set up some hooks we will need for later, especially one to handle the dispel coloring, and for
+-- masking the out of range overlay to fit the icon.
 function Addon:PreHook_CooldownViewer()
 	local frameName = self:GetName()
 	if frameName and Groups[frameName] and Groups[frameName].Buttons[frameName] then
