@@ -1,3 +1,7 @@
+# Version 12.0.0.4
+
+- Removed the chat message about dispel colors which introduced a new error; most likely this is caused by target swapping or debuff expiration and not a real problem anyway
+
 # Version 12.0.0.3
 
 - Fixed an error that sometimes occurred on bars with a variable number of buttons (fixes #18)

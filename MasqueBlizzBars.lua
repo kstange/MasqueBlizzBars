@@ -334,7 +334,9 @@ function Addon:Init()
 		-- ColorCurve needed for Dispel Types
 		Addon.DispelCurve = C_CurveUtil.CreateColorCurve()
 		Addon.DispelCurve:SetType(Enum.LuaCurveType.Step)
-		-- We might be missing at least one dispel type but I have no real way to know what it is without help
+		-- Colors and types are based on this static list, mostly verified
+		-- If there are any more IDs, Blizzard doesn't handle them in code right now
+		-- https://github.com/Gethe/wow-ui-source/blob/0944c3ad/Interface/AddOns/Blizzard_FrameXMLUtil/AuraUtil.lua#L4
 		Addon.DispelCurve:AddPoint(0, CreateColor(0.800, 0.000, 0.000, 1)) -- None
 		Addon.DispelCurve:AddPoint(1, CreateColor(0.000, 0.505, 1.000, 1)) -- Magic
 		Addon.DispelCurve:AddPoint(2, CreateColor(0.624, 0.023, 0.894, 1)) -- Curse
