@@ -12,8 +12,7 @@
 local _, Shared = ...
 
 -- From Locales/Locales.lua
--- Not used yet
---local L = Shared.Locale
+local L = Shared.Locale
 
 -- From Metadata.lua
 local Metadata = Shared.Metadata
@@ -248,10 +247,8 @@ function Addon:CooldownViewerItem_RefreshIconBorder()
 				else
 					if not frame._MBBDispelAlerted then
 						local secretAuraData = C_UnitAuras.GetAuraDataByAuraInstanceID(frame.auraDataUnit, frame.auraInstanceID)
-						print("Tracked Buffs is trying to display an unknown dispel type.",
-						      "Please report this to Masque Blizzard Inventory issue tracker ",
-						      "with the following: ", frame.auraSpellID, secretAuraData.name,
-						      secretAuraData.dispelName)
+						print(Metadata.FriendlyName, L["ERROR_MISSING_DISPEL_COLOR"],
+						      frame.auraSpellID, secretAuraData.name, secretAuraData.dispelName)
 						frame._MBBDispelAlerted = true
 					end
 					debuffBorder:SetVertexColor(0, 0, 0, 0)

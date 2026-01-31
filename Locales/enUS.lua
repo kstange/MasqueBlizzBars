@@ -34,6 +34,7 @@ local L = Shared.Locale
 --L["Vehicle Bar"] = "Vehicle Bar"
 --L["Extra Ability Buttons"] = "Extra Ability Buttons"
 --L["Pet Battle Bar"] = "Pet Battle Bar"
+--L["Tracked Bars"] = "Tracked Bars"
 --L["Tracked Buffs"] = "Tracked Buffs"
 --L["Essential Cooldowns"] = "Essential Cooldowns"
 --L["Utility Cooldowns"] = "Utility Cooldowns"
@@ -47,3 +48,5 @@ L["NOTES_EXTRA_ABILITY_BUTTONS"] = "This group includes the Extra Action Button 
                                    "and quests, and all Zone Ability Buttons shown for location-based " ..
                                    "abilities.\n\nSome buttons have additional background images framing " ..
                                    "them, so square skins tend to work best."
+L["ERROR_MISSING_DISPEL_COLOR"] = "Tracked Buffs is trying to display an unknown dispel type. Please " ..
+                                  "report this to issue tracker with the following information:"
