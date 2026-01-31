@@ -1,3 +1,9 @@
+# Version 12.0.0.3
+
+- Fixed an error that sometimes occurred on bars with a variable number of buttons (fixes #18)
+- Fixed the Out of Range indicator extending outside of Cooldown Manager buttons on some skins (fixes #17)
+- Added an error handler for unknown dispel colors; please report these if you see the chat message
+
 # Version 12.0.0.2
 
 - Fixed an error that sometimes occurred with buffs in the pandemic range on the Tracked Buffs bar (fixes #10)

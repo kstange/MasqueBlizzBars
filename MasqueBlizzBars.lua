@@ -130,6 +130,11 @@ function Addon:PreHook_CooldownViewer()
 				hooksecurefunc(frame, "RefreshIconBorder",
 				               Addon.CooldownViewerItem_RefreshIconBorder)
 			end
+			if frame.OutOfRange then
+				frame.OutOfRange:SetDrawLayer('ARTWORK', -1)
+				hooksecurefunc(frame, "RefreshIconColor",
+				               Addon.CooldownViewerItem_RefreshIconColor)
+			end
 			if not frame.IconMask then
 				frame.IconMask = frame.Icon:GetMaskTexture(1)
 			end
@@ -159,6 +164,32 @@ function Addon:PreHook_CooldownViewer()
 	end
 end
 
+-- Handle the out of range texture if it exists
+function Addon:CooldownViewerItem_RefreshIconColor()
+	local frame = self
+	if frame and frame.OutOfRange then
+		local frameName = frame:GetParent():GetName()
+		if frameName and Groups[frameName] then
+			local groupDisabled = Groups[frameName].Group.db.Disabled
+			local iconMask = frame.Icon:GetMaskTexture(1)
+			if frame._MBB_OOR_Mask then
+				local OORMask = frame.OutOfRange:GetMaskTexture(frame._MBB_OOR_Mask)
+				if groupDisabled or iconMask ~= OORMask then
+					frame.OutOfRange:RemoveMaskTexture(OORMask)
+					frame._MBB_OOR_Mask = nil
+				end
+			end
+			if not groupDisabled and not frame._MBB_OOR_Mask then
+				if iconMask then
+					frame.OutOfRange:AddMaskTexture(iconMask)
+					frame._MBB_OOR_Mask = frame.OutOfRange:GetNumMaskTextures()
+				end
+			end
+		end
+	end
+end
+
+-- Handle dispel type changes using a colorCurve
 function Addon:CooldownViewerItem_RefreshIconBorder()
 	local frame = self
 	if frame and frame.DebuffBorderMBB then
@@ -168,7 +199,19 @@ function Addon:CooldownViewerItem_RefreshIconBorder()
 			frame.DebuffBorder.Texture:SetShown(groupDisabled)
 			if frame.auraInstanceID and frame.auraDataUnit == "target" and not groupDisabled then
 				local color = C_UnitAuras.GetAuraDispelTypeColor(frame.auraDataUnit, frame.auraInstanceID, Addon.DispelCurve)
-				frame.DebuffBorderMBB:SetVertexColor(color.r, color.g, color.b, color.a)
+				if color then
+					frame.DebuffBorderMBB:SetVertexColor(color.r, color.g, color.b, color.a)
+				else
+					if not frame._MBBDispelAlerted then
+						local secretAuraData = C_UnitAuras.GetAuraDataByAuraInstanceID(frame.auraDataUnit, frame.auraInstanceID)
+						print("Tracked Buffs is trying to display an unknown dispel type.",
+						      "Please report this to Masque Blizzard Inventory issue tracker ",
+						      "with the following: ", frame.auraSpellID, secretAuraData.name,
+						      secretAuraData.dispelName)
+						frame._MBBDispelAlerted = true
+					end
+					frame.DebuffBorderMBB:SetVertexColor(0, 0, 0, 0)
+				end
 			else
 				frame.DebuffBorderMBB:SetVertexColor(0, 0, 0, 0)
 			end
@@ -243,16 +286,17 @@ function Addon:Init()
 	Groups.EssentialCooldownViewer.PreHookFunction = Addon.PreHook_CooldownViewer
 	Groups.UtilityCooldownViewer.PreHookFunction   = Addon.PreHook_CooldownViewer
 
-	-- ColorCurve needed for Dispel Types
 	if Core:CheckVersion({ 120000, nil }) then
+		-- ColorCurve needed for Dispel Types
 		Addon.DispelCurve = C_CurveUtil.CreateColorCurve()
 		Addon.DispelCurve:SetType(Enum.LuaCurveType.Step)
-		Addon.DispelCurve:AddPoint(0, CreateColor(0.800, 0.000, 0.000, 1))
-		Addon.DispelCurve:AddPoint(1, CreateColor(0.000, 0.505, 1.000, 1))
-		Addon.DispelCurve:AddPoint(2, CreateColor(0.624, 0.023, 0.894, 1))
-		Addon.DispelCurve:AddPoint(3, CreateColor(0.945, 0.416, 0.035, 1))
-		Addon.DispelCurve:AddPoint(4, CreateColor(0.482, 0.780, 0.000, 1))
-		Addon.DispelCurve:AddPoint(5, CreateColor(0.721, 0.000, 0.059, 1))
+		-- We might be missing at least one dispel type but I have no real way to know what it is without help
+		Addon.DispelCurve:AddPoint(0, CreateColor(0.800, 0.000, 0.000, 1)) -- None
+		Addon.DispelCurve:AddPoint(1, CreateColor(0.000, 0.505, 1.000, 1)) -- Magic
+		Addon.DispelCurve:AddPoint(2, CreateColor(0.624, 0.023, 0.894, 1)) -- Curse
+		Addon.DispelCurve:AddPoint(3, CreateColor(0.945, 0.416, 0.035, 1)) -- Disease
+		Addon.DispelCurve:AddPoint(4, CreateColor(0.482, 0.780, 0.000, 1)) -- Poison
+		Addon.DispelCurve:AddPoint(5, CreateColor(0.721, 0.000, 0.059, 1)) -- Bleed?
 	end
 
         -- Check if MoveAny is installed and handle the bar modifications it makes
