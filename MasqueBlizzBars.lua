@@ -9,10 +9,11 @@
 -- https://opensource.org/licenses/MIT.
 --
 
-local _, Shared = ...
+local AddonName, Shared = ...
 
 -- From Locales/Locales.lua
-local L = Shared.Locale
+-- Not used yet
+--local L = Shared.Locale
 
 -- From Metadata.lua
 local Metadata = Shared.Metadata
@@ -26,6 +27,8 @@ local Core = Shared.Core
 -- Push us into shared object
 local Addon = {}
 Shared.Addon = Addon
+
+local SkinnedKey = "_"..AddonName.."Skinned"
 
 -- Handle events for buttons that get created dynamically by Blizzard
 function Addon:HandleEvent(event)
@@ -139,7 +142,9 @@ function Addon:PreHook_CooldownViewer()
 			--             then Map Count to Applications
 			if frame.Icon.Icon then
 				iconParent = frame.Icon
-				iconParent.Count = iconParent.Applications
+				if not iconParent.Count then
+					iconParent.Count = iconParent.Applications
+				end
 			end
 
 			-- Cooldowns - Map Count to ChargeCount.Current
@@ -162,7 +167,7 @@ function Addon:PreHook_CooldownViewer()
 			end
 
 			-- Cooldowns - Handle masking the Out of Range frame
-			if frame.OutOfRange then
+			if frame.OutOfRange and not iconParent[SkinnedKey] then
 				frame.OutOfRange:SetDrawLayer('ARTWORK', -1)
 				hooksecurefunc(frame, "RefreshIconColor",
 				               Addon.CooldownViewerItem_RefreshIconColor)
@@ -185,7 +190,7 @@ function Addon:PreHook_CooldownViewer()
 			end
 
 			-- Hooks for the Pandemic State, we can hopefully handle this in the future
-			if Core:CheckVersion({ 120000, nil }) then
+			if Core:CheckVersion({ 120000, nil }) and not iconParent[SkinnedKey] then
 				hooksecurefunc(frame, "ShowPandemicStateFrame",
 				               Addon.CooldownViewerItem_ShowPandemicStateFrame)
 				hooksecurefunc(frame, "HidePandemicStateFrame",
