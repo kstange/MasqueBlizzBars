@@ -1,6 +1,7 @@
 # Version 12.0.0.4
 
 - Removed the chat message about dispel colors which introduced a new error; most likely this is caused by target swapping or debuff expiration and not a real problem anyway
+- Fixed an issue causing certain Cooldown Manager triggers to register multiple times; this should lower CPU usage
 
 # Version 12.0.0.3
 
