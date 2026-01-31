@@ -244,15 +244,12 @@ function Addon:CooldownViewerItem_RefreshIconBorder()
 			frame.DebuffBorder.Texture:SetShown(groupDisabled)
 			if frame.auraInstanceID and frame.auraDataUnit == "target" and not groupDisabled then
 				local color = C_UnitAuras.GetAuraDispelTypeColor(frame.auraDataUnit, frame.auraInstanceID, Addon.DispelCurve)
+				-- Users have reported secretAuraData is nil, not sure how this could
+				-- happen if an auraInstanceID is set, but it probably means the Aura
+				-- no longer exists, maybe a race condition with expiry or target swaps
 				if color then
 					debuffBorder:SetVertexColor(color.r, color.g, color.b, color.a)
 				else
-					if not frame._MBBDispelAlerted then
-						local secretAuraData = C_UnitAuras.GetAuraDataByAuraInstanceID(frame.auraDataUnit, frame.auraInstanceID)
-						print(Metadata.FriendlyName, L["ERROR_MISSING_DISPEL_COLOR"],
-						      frame.auraSpellID, secretAuraData.name, secretAuraData.dispelName)
-						frame._MBBDispelAlerted = true
-					end
 					debuffBorder:SetVertexColor(0, 0, 0, 0)
 				end
 			else
@@ -343,7 +340,7 @@ function Addon:Init()
 		Addon.DispelCurve:AddPoint(2, CreateColor(0.624, 0.023, 0.894, 1)) -- Curse
 		Addon.DispelCurve:AddPoint(3, CreateColor(0.945, 0.416, 0.035, 1)) -- Disease
 		Addon.DispelCurve:AddPoint(4, CreateColor(0.482, 0.780, 0.000, 1)) -- Poison
-		Addon.DispelCurve:AddPoint(5, CreateColor(0.721, 0.000, 0.059, 1)) -- Bleed?
+		Addon.DispelCurve:AddPoint(5, CreateColor(0.721, 0.000, 0.059, 1)) -- Bleed
 	end
 
         -- Check if MoveAny is installed and handle the bar modifications it makes
