@@ -189,6 +189,22 @@ function Addon:PreHook_CooldownViewer()
 				end
 			end
 
+			-- Persistently suppress stock overlay when Masque group is active
+			if iconParent.IconOverlay and not iconParent._MBB_OverlayHooked then
+				local groupName = frameName
+				local function suppressOverlay(overlay)
+					if Groups[groupName] and Groups[groupName].Group
+					   and not Groups[groupName].Group.db.Disabled then
+						overlay:Hide()
+					end
+				end
+				hooksecurefunc(iconParent.IconOverlay, "Show", suppressOverlay)
+				hooksecurefunc(iconParent.IconOverlay, "SetShown", function(self, shown)
+					if shown then suppressOverlay(self) end
+				end)
+				iconParent._MBB_OverlayHooked = true
+			end
+
 			-- Hooks for the Pandemic State, we can hopefully handle this in the future
 			if Core:CheckVersion({ 120000, nil }) and not iconParent[SkinnedKey] then
 				hooksecurefunc(frame, "ShowPandemicStateFrame",
@@ -206,6 +222,17 @@ function Addon:PreHook_CooldownViewer()
 				frame.DebuffBorder.Texture:SetShown(groupDisabled)
 			end
 		end
+
+		-- Debounced delayed ReSkin to fix border positioning after layout settles
+		if Groups[frameName]._reskinTimer then
+			Groups[frameName]._reskinTimer:Cancel()
+		end
+		Groups[frameName]._reskinTimer = C_Timer.NewTimer(0, function()
+			Groups[frameName]._reskinTimer = nil
+			if Groups[frameName].Group and not Groups[frameName].Group.db.Disabled then
+				Groups[frameName].Group:ReSkin()
+			end
+		end)
 
 	end
 end
