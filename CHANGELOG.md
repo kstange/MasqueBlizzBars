@@ -1,3 +1,7 @@
+# Version 12.0.0.5
+
+- Removed non-functional hooks related to MoveAny since it has had its own Masque support for some time
+
 # Version 12.0.0.4
 
 - Removed the chat message about dispel colors which introduced a new error; most likely this is caused by target swapping or debuff expiration and not a real problem anyway
