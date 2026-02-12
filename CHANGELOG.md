@@ -1,4 +1,4 @@
-# Version 12.0.0.5
+# Version 12.0.1.0
 
 - Added a workaround for addons that resize Cooldown Manager buttons separately from Edit Mode (fixes #11)
 - Removed a non-functional workaround related to MoveAny (it has had its own Masque support for some time)
