@@ -187,6 +187,11 @@ function Addon:PreHook_CooldownViewer()
 				               Addon.CooldownViewerItem_HidePandemicStateFrame)
 			end
 
+			-- Some CDM addons like BCDM change the size of the icons, let's reskin the icons when this happens
+			if not iconParent[SkinnedKey] then
+				hooksecurefunc(iconParent, "SetSize", Addon.CooldownViewerItem_SetSize)
+			end
+
 			-- Show the IconOverlay only if this group isn't enabled
 			local groupDisabled = Groups[frameName].Group.db.Disabled
 			iconParent.IconOverlay:SetShown(groupDisabled)
@@ -197,6 +202,17 @@ function Addon:PreHook_CooldownViewer()
 			end
 		end
 
+	end
+end
+
+-- If something calls SetSize() on a CDM button we need to call ReSkin() or the button won't look right
+function Addon:CooldownViewerItem_SetSize()
+	local parent = self:GetParent()
+	if parent then
+		local frameName = parent:GetName()
+		if Groups[frameName] then
+			Groups[frameName].Group:ReSkin(self)
+		end
 	end
 end
 
