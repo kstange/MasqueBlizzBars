@@ -9,7 +9,6 @@
 ## RequiredDeps: Masque
 ## SavedVariables: MasqueBlizzBars
 ## IconTexture: Interface\Addons\MasqueBlizzBars\Textures\Icon.tga
-## OptionalDeps: MoveAny
 
 ## X-Curse-Project-ID: 694481
 ## X-WoWI-ID: 26502
