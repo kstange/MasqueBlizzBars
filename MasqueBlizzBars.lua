@@ -192,9 +192,12 @@ function Addon:PreHook_CooldownViewer()
 				hooksecurefunc(iconParent, "SetSize", Addon.CooldownViewerItem_SetSize)
 			end
 
-			-- Show the IconOverlay only if this group isn't enabled
 			local groupDisabled = Groups[frameName].Group.db.Disabled
-			iconParent.IconOverlay:SetShown(groupDisabled)
+
+			-- Show the IconOverlay only if this group isn't enabled
+			if iconParent.IconOverlay then
+				iconParent.IconOverlay:SetShown(groupDisabled)
+			end
 
 			-- Show the stock DebuffBorder only if this group isn't enabled
 			if frame.DebuffBorder then

@@ -1,3 +1,7 @@
+# Version 12.0.1.1
+
+- Fixed an error that could occur in the Cooldown Manager when it updates (reported on CurseForge)
+
 # Version 12.0.1.0
 
 - Added a workaround for addons that resize Cooldown Manager buttons separately from Edit Mode (fixes #11)
@@ -12,7 +16,7 @@
 
 - Fixed an error that sometimes occurred on bars with a variable number of buttons (fixes #18)
 - Fixed the Out of Range indicator extending outside of Cooldown Manager buttons on some skins (fixes #17)
-- Added an error handler for unknown dispel colors; please report them if you see the chat message (fixes multiple Curseforge reports)
+- Added an error handler for unknown dispel colors; please report them if you see the chat message (fixes multiple CurseForge reports)
 - Added support for the Tracked Bars bar (fixes #12)
 
 # Version 12.0.0.2
