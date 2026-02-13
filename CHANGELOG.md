@@ -1,6 +1,6 @@
 # Version 12.0.1.1
 
-- Fixed an error that could occur in the Cooldown Manager when it updates (reported on CurseForge)
+- Added protection against an error that could occur in the Cooldown Manager (reported on CurseForge)
 
 # Version 12.0.1.0
 
