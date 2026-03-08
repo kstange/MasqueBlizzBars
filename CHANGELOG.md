@@ -1,3 +1,7 @@
+# Version 12.0.1.2
+
+- Added protection against an error that could occur when another addon updates a Cooldown Manager button in combat
+
 # Version 12.0.1.1
 
 - Added protection against an error that could occur in the Cooldown Manager (reported on CurseForge)

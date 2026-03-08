@@ -210,6 +210,7 @@ end
 
 -- If something calls SetSize() on a CDM button we need to call ReSkin() or the button won't look right
 function Addon:CooldownViewerItem_SetSize()
+	if InCombatLockdown() then return end
 	local parent = self:GetParent()
 	if parent then
 		local frameName = parent:GetName()
