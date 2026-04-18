@@ -30,6 +30,8 @@ Shared.Addon = Addon
 
 local SkinnedKey = "_"..AddonName.."Skinned"
 
+local AddonRestrictions = false
+
 -- Handle events for buttons that get created dynamically by Blizzard
 function Addon:HandleEvent(event)
 	-- Handle ExtraActionButton on Extra ActionBar updates
@@ -210,7 +212,7 @@ end
 
 -- If something calls SetSize() on a CDM button we need to call ReSkin() or the button won't look right
 function Addon:CooldownViewerItem_SetSize()
-	if InCombatLockdown() then return end
+	if AddonRestrictions or InCombatLockdown() then	return end
 	local parent = self:GetParent()
 	if parent then
 		local frameName = parent:GetName()
@@ -327,9 +329,26 @@ function Addon:ZoneAbilityFrame_UpdateDisplayedZoneAbilities()
 	end
 end
 
+function Addon:HandleEvent(event, _, state)
+	if event == "ADDON_RESTRICTION_STATE_CHANGED" then
+		if state == 0 then
+			AddonRestrictions = false
+		else
+			AddonRestrictions = true
+		end
+	end
+end
+
 -- These are init steps specific to this addon
 -- This should be run before Core:Init()
 function Addon:Init()
+	-- Hook for Addon Restrictions
+	if Core:CheckVersion({ 120000, nil }) then
+		Addon.Events = CreateFrame("Frame")
+		Addon.Events:RegisterEvent("ADDON_RESTRICTION_STATE_CHANGED")
+		Addon.Events:SetScript("OnEvent", Addon.HandleEvent)
+	end
+
 	-- Spell Flyout
 	if Core:CheckVersion({ 70003, nil }) then
 		hooksecurefunc(SpellFlyout, "Toggle",
