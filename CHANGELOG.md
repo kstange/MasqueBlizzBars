@@ -1,3 +1,7 @@
+# Version 12.0.5.1
+
+- Updated zhCN (Simplified Chinese) translation from LvWind
+
 # Version 12.0.5.0
 
 - Added a further protection against combat lockdown protections involving other Cooldown Manager addons
