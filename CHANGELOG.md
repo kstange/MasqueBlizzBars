@@ -1,3 +1,7 @@
+# Version 12.0.5.2
+
+- Updated ruRU (Russian) translation from ZamestoTV
+
 # Version 12.0.5.1
 
 - Updated zhCN (Simplified Chinese) translation from LvWind
