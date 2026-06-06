@@ -73,24 +73,24 @@ Metadata.Groups = {
 			MultiBarRightButton = NUM_MULTIBAR_BUTTONS
 		}
 	},
-	-- Three new bars for 10.0.0, also added in 2.5.5
+	-- Three new bars for 10.0.0, also added in 2.5.5 and 5.5.4
 	MultiBar5 = {
 		Title = "Action Bar 6",
-		Versions = { 20505, 30000, 100000, nil },
+		Versions = { 20505, 30000, 50504, nil },
 		Buttons = {
 			MultiBar5Button = NUM_MULTIBAR_BUTTONS
 		}
 	},
 	MultiBar6 = {
 		Title = "Action Bar 7",
-		Versions = { 20505, 30000, 100000, nil },
+		Versions = { 20505, 30000, 50504, nil },
 		Buttons = {
 			MultiBar6Button = NUM_MULTIBAR_BUTTONS
 		}
 	},
 	MultiBar7 = {
 		Title = "Action Bar 8",
-		Versions = { 20505, 30000, 100000, nil },
+		Versions = { 20505, 30000, 50504, nil },
 		Buttons = {
 			MultiBar7Button = NUM_MULTIBAR_BUTTONS
 		}

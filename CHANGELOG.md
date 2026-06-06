@@ -1,3 +1,9 @@
+# Version 12.0.7.0
+
+- Updated koKR (Korean) translation from Elnarfim
+- Added support for Action Bar 6 - 8 in Pandaria Classic 5.5.4
+- Updated TOC for Retail 12.0.7
+
 # Version 12.0.5.2
 
 - Updated ruRU (Russian) translation from ZamestoTV
