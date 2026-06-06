@@ -19,7 +19,6 @@ if Locale ~= "koKR" then return end
 local _, Shared = ...
 local L = Shared.Locale
 
-L = L or {}
 L["Action Bar 1"] = "액션 바 1"
 L["Action Bar 2"] = "액션 바 2"
 L["Action Bar 3"] = "액션 바 3"
