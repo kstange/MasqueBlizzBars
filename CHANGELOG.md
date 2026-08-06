@@ -1,3 +1,11 @@
+# Version 12.0.7.1
+
+Note: This version has not been tested for Retail 12.1.0 yet, but will be ready by patch day
+
+- Enabled support for Action Bar 6 - 8 in Classic Era 1.15.9
+- Updated TOC for Burning Crusade Classic 2.5.6
+- Updated TOC for Classic Era 1.15.9
+
 # Version 12.0.7.0
 
 - Added koKR (Korean) translation from Elnarfim
