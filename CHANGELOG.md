@@ -1,6 +1,9 @@
-# Version 12.0.7.1
+# Version 12.1.0.0
 
-Note: This version has not been tested for Retail 12.1.0 yet, but will be ready by patch day
+- Removed support for dispel border colors on the Tracked Buffs and Tracked Bars due to restrictions added in 12.1.0
+  - It's no longer possible to read information about buffs directly. The new system in 12.1.0 requires addons to create a secure AuraContainer with a button template and let the game populate it. Creating custom bars runs counter to the concept of this addon. While overlays for dispel colors will still appear, they will be controlled by the game, and may not match the shape and style of your skin.
+
+# Version 12.0.7.1
 
 - Enabled support for Action Bar 6 - 8 in Classic Era 1.15.9
 - Updated TOC for Burning Crusade Classic 2.5.6

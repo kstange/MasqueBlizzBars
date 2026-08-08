@@ -25,7 +25,9 @@ Masque Blizzard Bars can currently skin the following bars, according to your ga
   - Tracked Bars
   - Tracked Buffs
 
-Support for Buffs, Debuffs and External Defensives is planned in a future update.
+Support for Buffs, Debuffs and External Defensives bars are tententively planned for a future update.
+
+Alert, debuff, and pandemic styles for Cooldown Manager bars are not supported due to game restrictions. These will appear using the default style and may not match your skin.
 
 Each bar type is its own group so you can configure them independently from Masque's Skin Settings.
 
@@ -37,7 +39,7 @@ I don't play Classic so testing is somewhat limited, but I'll do my best to addr
 
 ## Compatibility
 
-This addon is intended to skin the base WoW interface. Addons that heavily modify parts of the base interface may conflict. If you experience a conflict, use Masque's Skin Settings to disable the affected group and reload your UI. This should allow the other addon to control the interface without interference.
+This addon is intended to skin the base WoW interface. Addons that heavily modify parts of the base interface may conflict. This is especially common with Cooldown Manager addons. If you experience a conflict, use Masque's Skin Settings to disable the affected group and reload your UI. This should allow the other addon to control the interface without interference.
 
 If you'd like to see Masque support in a conflicting addon, try sending a feature request to that addon's author directly.
 

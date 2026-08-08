@@ -213,14 +213,12 @@ local BuffIconViewerMap = {
 	Icon = "Icon",
 	Cooldown = "Cooldown",
 	Count = "Count",
-	DebuffBorder = "DebuffBorderMBB"
 }
 
 -- The BuffBarCooldownViewer Cooldown is on the bar, not the icon
 local BuffBarViewerMap = {
 	Icon = "Icon",
 	Count = "Count",
-	DebuffBorder = "DebuffBorderMBB"
 }
 
 Metadata.Types = {
