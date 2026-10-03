@@ -25,7 +25,7 @@ Masque Blizzard Bars can currently skin the following bars, according to your ga
   - Tracked Bars
   - Tracked Buffs
 
-Support for Buffs, Debuffs and External Defensives bars are tentatively planned for a future update.
+Support for Buffs, Debuffs and External Defensives bars is tentatively planned for a future update.
 
 Alert, debuff, and pandemic styles for Cooldown Manager bars are not supported due to game restrictions. These will appear using the default style and may not match your skin.
 
