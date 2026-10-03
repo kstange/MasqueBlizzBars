@@ -25,11 +25,15 @@ Masque Blizzard Bars can currently skin the following bars, according to your ga
   - Tracked Bars
   - Tracked Buffs
 
-Support for Buffs, Debuffs and External Defensives bars are tententively planned for a future update.
+Support for Buffs, Debuffs and External Defensives bars are tentatively planned for a future update.
 
 Alert, debuff, and pandemic styles for Cooldown Manager bars are not supported due to game restrictions. These will appear using the default style and may not match your skin.
 
 Each bar type is its own group so you can configure them independently from Masque's Skin Settings.
+
+## Forever Support
+
+World of Warcraft: Forever has nearly the same interface features as Retail, so it is _fully supported_.
 
 ## Classic Support
 
