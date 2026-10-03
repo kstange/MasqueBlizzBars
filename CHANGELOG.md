@@ -1,3 +1,9 @@
+# Version 12.1.5.0
+
+- Added support for Cooldown Manager bars, Extra Ability Buttons, and Spell Flyouts in Forever
+- Updated TOC for Retail 12.1.5 (PTR)
+- Updated TOC for Forever 1.60.1 (beta)
+
 # Version 12.1.0.0
 
 - Updated TOC for Retail 12.1.0

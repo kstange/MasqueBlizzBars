@@ -111,7 +111,7 @@ Metadata.Groups = {
 	SpellFlyout = {
 		Title = "Spell Flyouts",
 		Notes = L["NOTES_SPELL_FLYOUTS"],
-		Versions = { 70003, nil },
+		Versions = { 70003, nil, 16001, 20000 },
 		Buttons = {
 			SpellFlyoutPopupButton = 0
 		}
@@ -131,7 +131,7 @@ Metadata.Groups = {
 	ExtraAbilityContainer = {
 		Title = "Extra Ability Buttons",
 		Notes = L["NOTES_EXTRA_ABILITY_BUTTONS"],
-		Versions = { 40402, nil },
+		Versions = { 40402, nil, 16001, 20000 },
 
 		-- Keep track of the frames that have been processed
 		State = {
@@ -158,7 +158,7 @@ Metadata.Groups = {
 	},
 	BuffBarCooldownViewer = {
 		Title = "Tracked Bars",
-		Versions = { 110105, nil },
+		Versions = { 110105, nil, 16001, 20000 },
 		-- These are populated after the UI loads when the RefreshLayout
 		-- function is called
 		Delayed = true,
@@ -169,7 +169,7 @@ Metadata.Groups = {
 	},
 	BuffIconCooldownViewer = {
 		Title = "Tracked Buffs",
-		Versions = { 110105, nil },
+		Versions = { 110105, nil, 16001, 20000 },
 		-- These are populated after the UI loads when the RefreshLayout
 		-- function is called
 		Delayed = true,
@@ -180,7 +180,7 @@ Metadata.Groups = {
 	},
 	EssentialCooldownViewer = {
 		Title = "Essential Cooldowns",
-		Versions = { 110105, nil },
+		Versions = { 110105, nil, 16001, 20000 },
 		-- These are populated after the UI loads when the RefreshLayout
 		-- function is called
 		Delayed = true,
@@ -191,7 +191,7 @@ Metadata.Groups = {
 	},
 	UtilityCooldownViewer = {
 		Title = "Utility Cooldowns",
-		Versions = { 110105, nil },
+		Versions = { 110105, nil, 16001, 20000 },
 		-- These are populated after the UI loads when the RefreshLayout
 		-- function is called
 		Delayed = true,

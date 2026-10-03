@@ -276,20 +276,20 @@ end
 -- This should be run before Core:Init()
 function Addon:Init()
 	-- Hook for Addon Restrictions
-	if Core:CheckVersion({ 120000, nil }) then
+	if Core:CheckVersion({ 120000, nil, 16001, 20000 }) then
 		Addon.Events = CreateFrame("Frame")
 		Addon.Events:RegisterEvent("ADDON_RESTRICTION_STATE_CHANGED")
 		Addon.Events:SetScript("OnEvent", Addon.HandleEvent)
 	end
 
 	-- Spell Flyout
-	if Core:CheckVersion({ 70003, nil }) then
+	if Core:CheckVersion({ 70003, nil, 16001, 20000 }) then
 		hooksecurefunc(SpellFlyout, "Toggle",
 		               Addon.SpellFlyout_Toggle)
 	end
 
 	-- Cooldown Manager hook setup
-	if Core:CheckVersion({ 110105, nil }) then
+	if Core:CheckVersion({ 110105, nil, 16001, 20000 }) then
 		Groups.BuffBarCooldownViewer.PreHookFunction   = Addon.PreHook_CooldownViewer
 		Groups.BuffIconCooldownViewer.PreHookFunction  = Addon.PreHook_CooldownViewer
 		Groups.EssentialCooldownViewer.PreHookFunction = Addon.PreHook_CooldownViewer
@@ -300,7 +300,7 @@ function Addon:Init()
 	-- Zone Ability Buttons
 	-- This may be DraenorZoneAbilityFrame_Update if Classic reaches WoD
 	-- This may be ZoneAbilityFrame_Update if Classic reaches Legion
-	if Core:CheckVersion({ 90001, nil }) then
+	if Core:CheckVersion({ 90001, nil, 16001, 20000 }) then
 		hooksecurefunc(ZoneAbilityFrame, "UpdateDisplayedZoneAbilities",
 		               Addon.ZoneAbilityFrame_UpdateDisplayedZoneAbilities)
 	end
@@ -308,7 +308,7 @@ function Addon:Init()
 	Addon.Events = CreateFrame("Frame")
 
 	-- Extra Action Button
-	if Core:CheckVersion({ 40402, nil }) then
+	if Core:CheckVersion({ 40402, nil, 16001, 20000 }) then
 		Addon.Events:RegisterEvent("UPDATE_EXTRA_ACTIONBAR")
 	end
 
@@ -319,7 +319,7 @@ function Addon:Init()
 
 	Addon.Events:SetScript("OnEvent", Addon.HandleEvent)
 
-	if Core:CheckVersion({ 100000, nil }) then
+	if Core:CheckVersion({ 100000, nil, 16001, 20000 }) then
 		-- Empty the whole options table because we have no options yet
 		Metadata.Options = nil
 	else

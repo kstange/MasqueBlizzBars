@@ -1,4 +1,4 @@
-## Interface: 120100, 120007, 50504, 40402, 20506, 11509
+## Interface: 120105, 120100, 50504, 40402, 20506, 16001, 11509
 ## Version: @project-version@
 ## Title: Masque Blizzard Bars
 ## Notes: Enables Masque to skin the built-in action bars
