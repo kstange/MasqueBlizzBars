@@ -17,7 +17,7 @@ jobs:
   release:
 
     # we can run our steps on pretty much anything, but the "ubuntu-latest" image is a safe bet
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
 
     # specify the environment variables used by the packager, matching the secrets from the project on GitHub
     env:
